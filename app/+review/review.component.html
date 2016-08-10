@@ -1,0 +1,39 @@
+<md-card >
+  <app-detail-card *ngIf="scorecard" [scorecard]="scorecard"></app-detail-card>
+  <h4>Scorecard</h4>
+  <!--<div *ngFor="let score of scorecard?.scores" class="wishlist-item">
+    <div class="priority">
+      <span class="priority-weight"> {{score.score}}</span>
+    </div>
+    <div class="score">
+      <span class="item-description"> {{score.priority.description}} </span>
+      <span class="item-score">
+        <div>{{score.score}}</div>
+      </span>
+    </div>
+  </div>  -->
+  <app-hca-listitem *ngFor="let score of scorecard?.scores" 
+                    [model]="score" 
+                    [slidermodel]="score.score" 
+                    context="Scorecard"></app-hca-listitem>
+</md-card>
+<md-grid-list cols="3" [style.background]="'lightblue'">
+  <md-grid-tile>
+    <img class="grid-list-image" src="https://res.cloudinary.com/propertyvr/image/upload/v1460976380/Ludwig_Lounge_nfsodj.jpg" />
+  </md-grid-tile>
+  <md-grid-tile>
+    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+  </md-grid-tile>
+  <md-grid-tile>
+    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+  </md-grid-tile>
+  <md-grid-tile>
+    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+  </md-grid-tile>
+  <md-grid-tile>
+    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+  </md-grid-tile>
+  <md-grid-tile>
+    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+  </md-grid-tile>
+</md-grid-list>

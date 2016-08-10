@@ -1,0 +1,189 @@
+.container {
+  flex-flow: row wrap;
+  border: 1px solid red;
+  flex: 1;
+  display: flex;
+  overflow-y: auto; }
+
+.box {
+  min-height: -webkit-min-content;
+  display: flex; }
+
+md-card {
+  box-sizing: border-box;
+  margin: 1vw; }
+  md-card img {
+    border-radius: 2px 2px 0 0; }
+  md-card md-card-subtitle {
+    font-size: 18px; }
+
+.passive {
+  width: 48vw; }
+  .passive md-card-subtitle {
+    font-size: 14px; }
+
+.scorecard-total {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 0;
+  right: 5%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 20px 20px;
+  font-size: 10vw;
+  text-align: center;
+  color: #FFFFFF; }
+  .scorecard-total p {
+    margin: 0;
+    padding-top: 10%; }
+
+.smalltotal {
+  font-size: 5vw;
+  border-radius: 0 0 10px 10px; }
+
+.scorecard-headline-detail {
+  float: right;
+  font-size: 16px;
+  margin-left: 5%; }
+
+.clearfix:before, .clearfix:after {
+  content: '';
+  clear: both;
+  display: table; }
+
+.expander {
+  flex: 1 1 auto; }
+
+.body {
+  position: absolute;
+  top: 10vh;
+  bottom: 0;
+  height: 90vh;
+  display: flex; }
+
+.accommodate-exp-toolbar {
+  top: 16vh;
+  height: 84vh; }
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column; }
+
+.content {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  background: #FFFFFF;
+  padding: 0 2vw; }
+
+.box {
+  display: flex;
+  min-height: -webkit-min-content;
+  flex-flow: row wrap; }
+
+.dashboard-synopsis {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-bottom: 1vh; }
+  .dashboard-synopsis h4, .dashboard-synopsis h5 {
+    margin-top: 1vh;
+    margin-bottom: 2vh; }
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+  .stats-container .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: column; }
+    .stats-container .stats p {
+      text-transform: uppercase;
+      color: #9E9E9E;
+      margin: 0;
+      font-size: 12px; }
+    .stats-container .stats span {
+      font-size: 32px;
+      font-weight: bold; }
+
+.top-property-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  margin-top: 2vh;
+  font-size: 12px;
+  font-weight: 500; }
+  .top-property-container .top-property-score {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: column; }
+    .top-property-container .top-property-score p {
+      margin: 0;
+      font-size: 12px; }
+    .top-property-container .top-property-score span {
+      color: #FFA000;
+      font-size: 40px;
+      font-weight: bold; }
+  .top-property-container .top-property-details {
+    flex-flow: row wrap;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 4vw; }
+  .top-property-container .top-property-address {
+    display: flex;
+    margin-bottom: 16px; }
+  .top-property-container .top-property-price {
+    display: flex; }
+  .top-property-container .top-property-breakdown {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5vh; }
+  .top-property-container .top-property-breakdown-detail {
+    margin-left: 5%; }
+
+.new-user-guide {
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 2vh; }
+  .new-user-guide .guide-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2vh; }
+  .new-user-guide .hca-primary-button {
+    color: #FFFFFF;
+    background-color: #FFA000; }
+  .new-user-guide .guide-title {
+    flex: 1;
+    margin-left: 4vw; }
+  .new-user-guide .guide-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    text-align: center;
+    color: #FFFFFF; }
+  .new-user-guide .guide-active .guide-icon {
+    background-color: #a1e8dd; }
+
+.bottom-navigation {
+  display: flex;
+  background-color: #FFC107;
+  color: #FFFFFF;
+  align-items: center;
+  height: 8vh; }
+  .bottom-navigation .button-container {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    background-color: #FFC107; }

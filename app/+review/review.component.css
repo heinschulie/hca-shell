@@ -1,0 +1,69 @@
+.wishlist-item {
+  display: flex;
+  align-items: flex-start;
+  flex: 1 100% !important;
+  margin-bottom: 4vh; }
+  .wishlist-item .score {
+    display: flex;
+    flex: 3 auto;
+    align-items: center;
+    height: 30px;
+    border-bottom: 2px dotted gray; }
+  .wishlist-item .priority {
+    display: flex;
+    justify-content: center;
+    flex: 2; }
+
+.priority-weight {
+  width: 30px;
+  height: 30px;
+  background-color: #B6B6B6;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF; }
+
+.item-description {
+  flex: 3 auto;
+  font-weight: bolder;
+  font-size: 14px; }
+
+.item-score {
+  font-weight: bold;
+  display: flex;
+  flex: 1 auto;
+  justify-content: center;
+  font-size: 22px;
+  color: #FFC107; }
+
+.expander {
+  flex: 1 1 auto; }
+
+.scorecard-total {
+  position: absolute;
+  top: 10%;
+  font-size: 32px; }
+
+.scorecard-headline {
+  display: block;
+  width: 33%;
+  float: left;
+  text-align: center; }
+
+.scorecard-headline-detail {
+  display: block;
+  width: 100%;
+  font-size: 24px; }
+
+.scorecard-headline-descriptor {
+  display: block;
+  width: 100%;
+  font-size: 16px; }
+
+md-grid-tile {
+  overflow: hidden; }
+
+.grid-list-image {
+  height: 100%; }

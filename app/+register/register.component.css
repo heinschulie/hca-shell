@@ -1,0 +1,42 @@
+.register-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
+  background-color: #FFC107; }
+
+.register-card-content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  align-self: center;
+  align-items: center; }
+
+.register-form {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-flow: column;
+  width: 85%;
+  background: #FFFFFF;
+  border-radius: 0 10% 10% 0;
+  align-items: flex-start;
+  padding: 10% 0 10% 10%; }
+
+.register-button {
+  margin-top: 2vh;
+  align-self: flex-start;
+  color: #FFFFFF;
+  background-color: #FFA000; }
+
+.form-input {
+  width: 80%; }
+
+.br-slab {
+  width: 40%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  align-self: flex-end; }
+
+.login-link {
+  font-family: Roboto, "Helvetica Neue", sans-serif; }

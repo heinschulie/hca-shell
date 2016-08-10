@@ -1,0 +1,14 @@
+
+
+<md-card class="wishlist-card-container">
+  <md-card-content>
+    <strong>Let’s prioritise..</strong> List up to 10 things (min 4) you would like to see in your new home. Below are some hints, click to personalise.
+  </md-card-content>
+  <md-divider></md-divider>
+  <app-hca-listitem *ngFor="let priority of wishlist?.priorities" 
+                    [model]="priority" 
+                    [slidermodel]="priority.weight" 
+                    context="Wishlist"></app-hca-listitem>
+  
+  <button md-button (click)="zero()">Add Priority</button>
+</md-card>

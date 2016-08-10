@@ -1,0 +1,58 @@
+md-card {
+  box-sizing: border-box;
+  margin: 1.5%; }
+  md-card img {
+    border-radius: 2px 2px 0 0; }
+  md-card md-card-subtitle {
+    font-size: 18px; }
+
+.scorecard-total {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 0;
+  right: 5%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 20px 20px;
+  font-size: 10vw;
+  text-align: center;
+  color: white; }
+  .scorecard-total p {
+    margin: 0;
+    padding-top: 10%; }
+
+.mother {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center; }
+  .mother .sync-container {
+    margin-right: 4%; }
+    .mother .sync-container .sync-indicator {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background: red; }
+  .mother .brother {
+    flex-flow: row wrap;
+    flex-grow: 30;
+    justify-content: space-between;
+    align-items: flex-start; }
+  .mother .child1 {
+    display: flex;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 16px; }
+  .mother .child2 {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    margin-left: 2%; }
+  .mother .child3 {
+    display: flex;
+    font-size: 14px; }
+  .mother .child4 {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; }
+  .mother span.scorecard-headline-detail {
+    margin-left: 5%; }

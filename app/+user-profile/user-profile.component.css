@@ -1,0 +1,22 @@
+.user-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around; }
+
+.user-card-content {
+  flex: 1;
+  display: flex;
+  margin: 10%;
+  width: 80%;
+  align-self: center;
+  align-items: center; }
+
+.user-form {
+  display: flex;
+  flex-flow: column;
+  width: 100%; }
+
+.user-button {
+  margin-top: 5vh;
+  align-self: flex-end; }

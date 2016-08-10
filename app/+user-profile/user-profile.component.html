@@ -1,0 +1,17 @@
+
+<div class="user-card">
+  <md-card>
+    <img md-card-image [src]="model.image">
+    <app-image-uploader (imageUrlChange) = "onImageChange($event)"></app-image-uploader>
+  </md-card>
+  <div class="user-card-content">
+    <form class="user-form" (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <md-input #username class="full-width" required [(ngModel)]="model.username" name="username" placeholder="email"></md-input>
+      <md-input class="full-width" required [(ngModel)]="model.firstName" name="fname" placeholder="First Name"></md-input>
+      <md-input class="full-width" required [(ngModel)]="model.lastName" name="lname" placeholder="Last Name"></md-input>
+      <button class="user-button" type="submit"  [disabled]="!userForm.form.valid" md-fab>
+        <md-icon class="md-24">edit</md-icon>
+      </button>
+    </form>
+  </div>
+</div>

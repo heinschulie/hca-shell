@@ -1,0 +1,66 @@
+<md-card class="stepper-card clearfix">
+  <md-card-title class="stepper-title">
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : addActive() }">
+      <span *ngIf="!addComplete()" (click)="toggleAddComplete = !toggleAddComplete">1</span>
+      <md-icon *ngIf="addComplete()">done</md-icon>
+    </button> 
+    <span class="title">Add</span>
+  </md-card-title>
+  <div class="stepper-detail-container stepper-border" *ngIf="!queryPropertyId">
+    <form class="add-form" (ngSubmit)="addNewProperty()" #addForm="ngForm">
+      <md-input #address class="form-input" required [(ngModel)]="scorecard.property.address" name="address" placeholder="What is the address"></md-input>
+      <md-input #bedrooms class="form-input" required [(ngModel)]="scorecard.property.bedrooms" name="bedrooms" placeholder="Number of bedrooms?"></md-input>
+      <md-input #cost class="form-input" required [(ngModel)]="scorecard.property.cost" name="cost" placeholder="What is the asking price?"></md-input>
+      <button class="add-button" type="submit"  [disabled]="!addForm.form.valid" md-raised-button>
+        Add
+      </button>
+    </form>
+  </div>
+  <div class="stepper-detail-container stepper-border" *ngIf="queryPropertyId">
+    <div class="property-container">
+      <div class="property-details">
+          <div class="property-address">
+            {{scorecard?.property?.address}}  
+          </div>
+          <div class="property-price">
+            {{scorecard?.property?.cost}}  
+            <div class="property-breakdown">     
+              <span class="property-breakdown-detail">
+                {{scorecard?.property?.bedrooms}}  
+              </span>
+              <span class="property-breakdown-detail">145 sqm</span> 
+            </div> 
+          </div>
+      </div>
+    </div>
+  </div>
+  <md-card-title class="stepper-title">  <!--(click)="imageActive = !imageActive"-->
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : imageActive() }">
+      <span *ngIf="!imageComplete()" (click)="toggleImageComplete = !toggleImageComplete">2</span>
+      <md-icon *ngIf="imageComplete()">done</md-icon>
+    </button> 
+    <span class="title">Key Image</span>
+  </md-card-title>
+  <div class="stepper-detail-container stepper-border"> <!--*ngIf="imageActive()"-->
+    <md-card>
+      <img md-card-image [src]="scorecard?.property?.image">
+      <app-image-uploader (imageUrlChange) = "onImageChange($event)"></app-image-uploader>
+    </md-card>
+  </div>
+  <md-card-title class="stepper-title"> <!--(click)="rateActive = !rateActive"-->
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : rateActive() }">
+      <span *ngIf="!rateComplete()" (click)="toggleRateComplete = !toggleRateComplete">3</span>
+      <md-icon *ngIf="rateComplete()">done</md-icon>
+    </button> 
+    <span class="title">Rate</span>
+    <button md-raised-button class="arr-camera" [disabled]="!rateActive()">
+      <!--<md-icon class="md-24">photo_camera</md-icon>--> Take Picture
+    </button>
+  </md-card-title>
+  <div class="stepper-detail-container rate-container" *ngIf="rateActive()"> <!---->
+    <app-hca-listitem *ngFor="let score of scorecard?.scores" 
+                    [model]="score" 
+                    [slidermodel]="score.score" 
+                    context="Scorecard"></app-hca-listitem>
+  </div>
+</md-card>
