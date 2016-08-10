@@ -1,0 +1,355 @@
+@import '../styles/colors.scss'; 
+
+// Base Colors
+// $shade-10: #2c3e50 !default;
+// $shade-1: #d7dcdf !default;
+// $shade-0: #fff !default;
+// $teal: #1abc9c !default;
+
+
+// // Reset
+// * {
+//   &,
+//   &:before,
+//   &:after {
+//     box-sizing: border-box;
+//   }
+// }
+
+// body {
+//   font-family: sans-serif;
+//   padding: 60px 20px;
+  
+//   @media (min-width: 600px) {
+//     padding: 60px;
+//   }
+// }
+
+// .range-slider {
+//   margin: 60px 0 0 0%;
+// }
+
+
+// // Range Slider
+// $range-width: 100% !default;
+
+// $range-handle-color: $shade-10 !default;
+// $range-handle-color-hover: $teal !default;
+// $range-handle-size: 20px !default;
+
+// $range-track-color: $shade-1 !default;
+// $range-track-height: 10px !default;
+
+// $range-label-color: $shade-10 !default;
+// $range-label-width: 60px !default;
+
+// .range-slider {
+//   width: $range-width;
+// }
+
+// .range-slider__range {
+//   -webkit-appearance: none;
+//   width: calc(100% - (#{$range-label-width + 13px}));
+//   height: $range-track-height;
+//   border-radius: 5px;
+//   background: $range-track-color;
+//   outline: none;
+//   padding: 0;
+//   margin: 0;
+
+//   // Range Handle
+//   &::-webkit-slider-thumb {
+//     appearance: none;
+//     width: $range-handle-size;
+//     height: $range-handle-size;
+//     border-radius: 50%;
+//     background: $range-handle-color;
+//     cursor: pointer;
+//     transition: background .15s ease-in-out;
+
+//     &:hover {
+//       background: $range-handle-color-hover;
+//     }
+//   }
+
+//   &:active::-webkit-slider-thumb {
+//     background: $range-handle-color-hover;
+//   }
+
+//   &::-moz-range-thumb {
+//     width: $range-handle-size;
+//     height: $range-handle-size;
+//     border: 0;
+//     border-radius: 50%;
+//     background: $range-handle-color;
+//     cursor: pointer;
+//     transition: background .15s ease-in-out;
+
+//     &:hover {
+//       background: $range-handle-color-hover;
+//     }
+//   }
+
+//   &:active::-moz-range-thumb {
+//     background: $range-handle-color-hover;
+//   }
+// }
+
+
+// // Range Label
+// .range-slider__value {
+//   display: inline-block;
+//   position: relative;
+//   width: $range-label-width;
+//   color: $shade-0;
+//   line-height: 20px;
+//   text-align: center;
+//   border-radius: 3px;
+//   background: $range-label-color;
+//   padding: 5px 10px;
+//   margin-left: 8px;
+
+//   &:after {
+//     position: absolute;
+//     top: 8px;
+//     left: -7px;
+//     width: 0;
+//     height: 0;
+//     border-top: 7px solid transparent;
+//     border-right: 7px solid $range-label-color;
+//     border-bottom: 7px solid transparent;
+//     content: '';
+//   }
+// }
+
+
+// // Firefox Overrides
+// ::-moz-range-track {
+//     background: $range-track-color;
+//     border: 0;
+// }
+
+// input::-moz-focus-inner,
+// input::-moz-focus-outer { 
+//   border: 0; 
+// }
+
+
+
+// body {
+//   background: #eee;
+//   font-family: 'Roboto', sans-serif;
+//   overflow: hidden;
+// }
+
+// .range-container{
+//     height: 20vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// #range {
+//   width: 180px;
+//   height: 4px;
+//   border: 0;
+//   border-radius: 100px;
+//   background: rgba(0,0,0,0.2);
+//   outline: none;
+// }
+// #range .ui-slider-handle {
+//   position: absolute;
+//   margin: -6px 0 0 -17px;
+//   border-radius: 100px;
+//   background: #158789;
+//   color: #fff;
+//   border: 0;
+//   height: 20px;
+//   line-height: 20px;
+//   text-align: center;
+//   width: 34px;
+//   outline: none;
+//   cursor: pointer;
+//   font-size: 8px;
+//   font-weight: 800;
+//   text-decoration: none;
+//   transition: transform 0.1s ease;
+// }
+// #range .ui-slider-handle:hover,
+// #range .ui-slider-handle:focus {
+//   transform: scale(1.1);
+// }
+// #range .ui-slider-range {
+//   background: #69b6b5;
+// }
+//.cntr {
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+//}
+
+
+
+// Styling Cross-Browser Compatible Range Inputs with Sass
+// Github: https://github.com/darlanrod/input-range-sass
+// Author: Darlan Rod https://github.com/darlanrod
+// Version 1.0.1
+// MIT License
+
+$track-color: $accent-color;
+$thumb-color: $dark-primary-color;
+
+$thumb-radius: 50%;
+$thumb-height: 20px;
+$thumb-width: 7.5%;
+$thumb-shadow-size: 0;
+$thumb-shadow-blur: 0;
+$thumb-shadow-color: red;
+$thumb-border-width: 1px;
+$thumb-border-color: #fff;
+
+$track-width: 100%;
+$track-height: 2px;
+$track-shadow-size: 0;
+$track-shadow-blur: 0;
+$track-shadow-color: orange;
+$track-border-width: 1px;
+$track-border-color: magenta;
+
+$track-radius: 50%;
+$contrast: 5%;
+
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+  box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+}
+
+@mixin track() {
+  width: $track-width;
+  height: $track-height;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+// ORIGINAL
+@mixin thumb() {
+  //@include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+  //border: $thumb-border-width solid $thumb-border-color;
+
+  //height: $thumb-height;    Height was originally in but substituted it with padding-bottom. 
+  padding-bottom: $thumb-width; 
+  width: $thumb-width;
+  border-radius: $thumb-radius;
+  background: $thumb-color; 
+  cursor: pointer;
+}
+
+[type=range] {
+  -webkit-appearance: none;
+  margin: $thumb-height / 2 0;
+  width: $track-width;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    @include track();
+    // @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: $track-color;
+    // border: $track-border-width solid $track-border-color;
+    // border-radius: $track-radius;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb();
+    -webkit-appearance: none;
+    margin-top: ((-$track-border-width * 2 + $track-height) / 2) - ($thumb-height / 2);
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+    background: lighten($track-color, $contrast);
+  }
+
+  &::-moz-range-track {
+    @include track();
+    // @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: $track-color;
+    // border: $track-border-width solid $track-border-color;
+    // border-radius: $track-radius;
+  }
+
+  &::-moz-range-thumb {
+    @include thumb();
+  }
+
+  &::-ms-track {
+    @include track();
+    background: transparent;
+    border-color: transparent;
+    border-width: $thumb-width 0;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    // @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: darken($track-color, $contrast);
+    // border: $track-border-width solid $track-border-color;
+    // border-radius: $track-radius * 2;
+  }
+
+  &::-ms-fill-upper {
+    // @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: $track-color;
+    // border: $track-border-width solid $track-border-color;
+    // border-radius: $track-radius * 2;
+  }
+
+  &::-ms-thumb {
+    @include thumb();
+  }
+
+  &:focus::-ms-fill-lower {
+    background: $track-color;
+  }
+
+  &:focus::-ms-fill-upper {
+    background: lighten($track-color, $contrast);
+  }
+}
+
+span.range-slider__value{
+    background: url('https://res.cloudinary.com/swigbig/image/upload/v1469548233/tag_p3enhs.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center center;  
+    width: 20%;
+    display: block;
+    text-align: center;
+    height: 6vh;
+    font-size: 4vh;
+    color: white;
+
+    md-icon{
+      position:absolute;
+    }
+}
+
+
+.range-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-end; 
+  width: 90%;
+  margin: 0 auto; 
+}
+
+.range-slider{
+  flex: 1; 
+}
+.range-description {
+    margin: 0 10px;
+    padding: 0;
+    font-size: 10px;
+}

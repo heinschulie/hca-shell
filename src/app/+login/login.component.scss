@@ -1,0 +1,52 @@
+@import '../styles/colors.scss'; 
+
+.login-card{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
+  background-color: $primary-color;
+}
+
+.login-card-content{
+    flex: 1;
+    display: flex;
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    justify-content: flex-start;
+    height: 90vh;
+    background-color: $primary-color;
+}
+
+.login-form{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-flow: column;
+  width: 85%;
+  background: $white;
+  border-radius: 0 10% 10% 0;
+  align-items: flex-start;
+  padding: 10% 0 10% 10%;
+}
+
+.login-button{
+    margin-top: 2vh;
+    align-self: flex-start;
+}
+
+.form-input{
+  width: 80%; 
+}
+
+.br-slab {
+    width: 40%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    align-self: flex-end;
+}
+
+.register-link{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

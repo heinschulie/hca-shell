@@ -1,0 +1,12 @@
+@import '../styles/colors.scss'; 
+
+.container-card{
+    //width: 100vw;
+    height: 100vh;
+}
+
+.image-strip{
+    margin-top: 15px; 
+    padding-bottom: 5px;
+    border-bottom: 1px dotted $divider-color;
+}

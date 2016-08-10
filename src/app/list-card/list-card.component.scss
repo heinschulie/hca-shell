@@ -1,0 +1,50 @@
+
+@import '../styles/colors.scss'; 
+
+md-card{
+    box-sizing: border-box ;
+    margin: 1.5%;
+
+    img{
+        border-radius: 2px 2px 0 0;
+    }
+    md-card-subtitle {
+        font-size: 18px; 
+    } 
+}
+
+.scorecard-total{
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    top: 0;
+    right: 5%;
+    background-color: transparentize($color: black, $amount: 0.5);
+    font-size: 5vw;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    color: $white;
+    p {
+        margin: 0;
+        padding-top: 10%;
+    }
+}
+
+.list-card-title{
+    font-size: 12px;
+    margin: 0; 
+}
+.list-card-subtitle{
+    color: $accent-color; 
+    font-size: 10px;
+    margin: 0;  
+}
+
+md-card-header .md-card-header-text{
+    margin: 0; 
+}
+
+md-card-subtitle.list-card-subtitle{
+    font-size: 10px;
+    margin: 0;  
+}

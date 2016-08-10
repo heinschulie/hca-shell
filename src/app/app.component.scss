@@ -1,0 +1,81 @@
+@import './styles/breakpoints.scss'; 
+@import './styles/colors.scss'; 
+@import './styles/mixins.scss'; 
+
+//Variables 
+$toolbar-height: 10vh; 
+
+md-sidenav-layout{
+    //background-color: $primary-color; 
+    
+    md-sidenav {
+        width: 70%;
+    }
+
+    md-content{
+        height: 100% !important; 
+        border: 3px solid green;
+    }
+}
+
+// Toolbar style states
+
+md-toolbar{
+    min-height: $toolbar-height;
+    height: $toolbar-height;
+    background-color: $light-primary-color; 
+    border-radius: 0 0 10px 10px;
+}
+md-toolbar-row{
+    min-height: $toolbar-height;
+    height: $toolbar-height;
+}
+
+.expandedtoolbar{
+    //min-height: 100px;
+    min-height: 16vh;
+    border-radius: 0;
+}
+
+.toolbar-dress{ //Black border-radiused element 
+    position: absolute;
+    top: 0;
+    height: $toolbar-height;
+    background-color: black;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+.md-toolbar-menu{
+    z-index: 1;
+    color: $white;
+}
+
+.toolbar-title-container{
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 auto;
+    z-index: 1;
+    align-self: center;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    top: $toolbar-height;
+    height: 6vh; 
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    padding-left: 24px;
+
+    .toolbar-title{
+        flex: 1;
+        display: flex;
+    }
+    .toolbar-cancel{
+        //align-self: flex-end; 
+    }
+}
+
+

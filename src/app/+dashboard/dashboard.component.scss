@@ -1,0 +1,305 @@
+@import '../styles/colors.scss';
+// md-content {
+//     height: 100%;
+// }
+.container {
+    // height: 0;
+    // display:flex;
+    // overflow: scroll;
+    flex-flow: row wrap;
+    // min-height: -webkit-min-content;
+    // display: flex;
+     border:1px solid red;
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+}
+
+.box {
+  min-height: -webkit-min-content;
+  //min-width: -webkit-min-content;
+  display: flex;
+}
+
+md-card{
+    box-sizing: border-box ;
+    //float: left;
+    margin: 1vw;
+
+    img{
+        border-radius: 2px 2px 0 0;
+    }
+
+    md-card-subtitle {
+        font-size: 18px; 
+    }  
+}
+
+.passive {
+    width: 48vw; 
+    md-card-subtitle {
+        font-size: 14px; 
+    }
+}
+
+.scorecard-total{
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    top: 0;
+    right: 5%;
+    background-color: transparentize($color: black, $amount: 0.5);
+    border-radius: 0 0 20px 20px;
+    font-size: 10vw;
+    text-align: center;
+    color: $white;
+    p {
+        margin: 0;
+        padding-top: 10%;
+    }
+}
+
+.smalltotal{
+    font-size: 5vw;
+    border-radius: 0 0 10px 10px;
+}
+
+.scorecard-headline-detail{
+    float: right; 
+    font-size: 16px;
+    margin-left: 5%;
+}
+.clearfix{
+    &:before, &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+// .mother{
+//     display: flex;
+//     flex-flow: row nowrap;
+//     align-items: center;
+
+//     .sync-container{
+//         margin-right: 4%;
+//         .sync-indicator{
+//             border-radius: 50%;
+//             width: 30px;
+//             height: 30px; 
+//             background: red;
+//         }
+//     }
+
+//     .brother{
+//         flex-flow: row wrap;
+//         flex-grow: 30;
+//         justify-content: space-between;
+//         align-items: flex-start;
+//     }
+//     .child1{
+//         display: flex;
+//         font-size: 14px;
+//         font-weight: 400;
+//         margin-bottom: 16px;
+//     }
+//     .child2{
+//         display: flex;
+//         align-self: flex-start;
+//         align-items: center;
+//     }
+//     .child3{
+//         display: flex;
+//         //flex: 1;
+//     }
+//     .child4{
+//         flex: 1;
+//     }
+// }
+
+.expander {
+  // This fills the remaining space, by using flexbox.  
+  // Every toolbar row uses a flexbox row layout. 
+  flex: 1 1 auto;
+}
+
+// footer {
+//   height:40px;
+//   bottom:0;
+//   background-color: #001F3F;
+//   color:white;
+//   display: flex;
+//   justify-content: space-around;
+// }
+
+.body {
+  position: absolute;
+  top: 10vh; // Toolbar height
+//   right: 2vw;
+//   left: 2vw;
+  bottom: 0;
+  height: 90vh;
+  display: flex;
+}
+
+.accommodate-exp-toolbar{
+    top: 16vh;
+//   top: 100px;
+    height: 84vh; 
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  background: $white;
+  padding: 0 2vw; 
+}
+
+.box {
+    display: flex;
+    min-height: -webkit-min-content;
+    flex-flow: row wrap;
+}
+
+
+// START : Panel that appears atop Dashboard
+.dashboard-synopsis{
+    display: flex;
+    flex-flow: column; 
+    width: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin-bottom: 1vh;
+    h4,h5{
+        margin-top: 1vh; 
+        margin-bottom: 2vh; 
+    }
+}
+.stats-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .stats{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: column; 
+        p{
+            text-transform: uppercase;
+            color: $accent-color;
+            margin: 0;
+            font-size: 12px;
+        }
+        span{
+            font-size: 32px;
+            font-weight: bold;
+        }
+    }
+}
+.top-property-container{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    margin-top: 2vh;
+    font-size: 12px;
+    font-weight: 500;
+
+    .top-property-score{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: column; 
+        p{
+            margin: 0;
+            font-size: 12px;
+        }
+        span{
+            color: $dark-primary-color;
+            font-size: 40px;
+            font-weight: bold;
+        }
+    }
+
+    .top-property-details{
+        flex-flow: row wrap;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-left: 4vw; 
+    }
+    .top-property-address{
+        display: flex;
+        margin-bottom: 16px;
+    }
+    .top-property-price{
+        display: flex;
+    }
+    .top-property-breakdown{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 5vh;
+    }
+
+    .top-property-breakdown-detail {
+        margin-left: 5%;
+    }
+}
+.new-user-guide{
+    font-size: 11px; 
+    font-weight: 500;
+    margin-bottom: 2vh;
+        
+    .guide-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2vh;
+    }
+    .hca-primary-button {
+        color: $white;
+        background-color: $dark-primary-color;
+    }
+    .guide-title{
+        flex: 1;
+        margin-left: 4vw;
+    }
+    .guide-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: gray;
+        width: 8vw;
+        height: 8vw;
+        border-radius: 50%;
+        text-align: center;
+        color: $white;
+    }
+    .guide-active .guide-icon{
+        background-color: $green;
+    }
+}
+// END : Panel that appears atop Dashboard
+
+.bottom-navigation{
+    display: flex;
+    background-color: $primary-color; 
+    color: $white;
+    align-items: center; 
+    height: 8vh;
+    .button-container{
+        display: flex;
+        flex-grow: 1;
+        height: 100%;
+        background-color: $primary-color; 
+    }
+}
+

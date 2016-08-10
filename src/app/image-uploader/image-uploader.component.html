@@ -1,0 +1,5 @@
+<div class="image-uploader-container">
+    <input type="file" name="file" id="file" class="inputfile" (change)="onChange($event)"/>
+    <label for="file" md-button>Choose a file</label>
+    <button md-button [disabled]="!file" (click)="createSignature()">Upload</button>
+</div>

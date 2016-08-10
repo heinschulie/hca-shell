@@ -1,0 +1,67 @@
+<!--<md-card class="clearfix">-->
+  
+  <!--<md-card-title class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" (click)="active = !active">
+    <span>5</span>
+    {{title}}
+    <div *ngIf="!active">
+      <div [ngSwitch]="context">
+        <md-icon *ngSwitchCase="'Wishlist'">create</md-icon>
+        <md-icon *ngSwitchCase="'Scorecard'">star_rate</md-icon>
+        <md-icon *ngSwitchDefault>keyboard_arrow_up</md-icon>
+      </div>
+    </div>
+  </md-card-title>
+  
+  <div class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" (click)="active = !active">
+    <span class="list-title-primary" [ngClass]="{ 'list-title-primary-valid' : data.weight }">{{data.weight}}</span>
+    <span class="list-title-secondary" [ngClass]="{ 'list-title-secondary-inactive' : !active }">
+      <p>{{data.description}}</p>
+      <div *ngIf="!active">
+        <div [ngSwitch]="context">
+          <md-icon class="list-title-icon" *ngSwitchCase="'Wishlist'">create</md-icon>
+          <md-icon class="list-title-icon" *ngSwitchCase="'Scorecard'">star_rate</md-icon>
+          <md-icon class="list-title-icon" *ngSwitchDefault>keyboard_arrow_up</md-icon>
+        </div>
+      </div>
+    </span>
+  </div>
+  
+  
+  -->
+
+  <!-- FOR WISHLIST -->
+  <div *ngIf="context === 'Wishlist'" class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" (click)="active = !active">
+    <span class="list-title-primary" [ngClass]="{ 'list-title-primary-valid' : data.weight }">{{data.weight}}</span>
+    <span class="list-title-secondary" [ngClass]="{ 'list-title-secondary-inactive' : !active }">
+      <p>{{data.description}}</p>
+      <md-icon *ngIf="!active && !data.weight" class="list-title-icon">create</md-icon>
+      <button md-button *ngIf="!active && !!data.weight" class="list-title-icon button">Delete</button>
+    </span>
+  </div>
+
+  <!-- FOR SCORECARD -->
+  <div *ngIf="context === 'Scorecard'" class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" (click)="active = !active">
+    <span class="list-title-secondary" [ngClass]="{ 'list-title-secondary-inactive' : !active }">  
+      <p>{{data.priority.description}}</p>
+      <span>
+        <md-icon *ngIf="!active && !data.score" class="list-title-icon">star_rate</md-icon>
+        <span *ngIf="!active && !!data.score" class="list-title-icon score">{{data.score}}</span>
+      </span>
+    </span>
+  </div>
+  <div class="list-detail-container" *ngIf="active">
+    <md-card-subtitle [ngSwitch]="context" class="list-detail-subtitle">
+      <span *ngSwitchCase="'Wishlist'">
+        How important is this to you, on a scale of 1-5?
+      </span>
+      <span *ngSwitchCase="'Scorecard'">
+        How does this rate in your opinion?
+      </span>
+    </md-card-subtitle>
+    <app-hca-rangeinput context="{{context}}" [slidermodel]="data"></app-hca-rangeinput>
+    <button class="list-button" md-button (click)="test()">Done</button>
+    <md-divider></md-divider>
+  </div>
+<!--</md-card>-->
+
+<!--[(ngModel)]="priority.weight"-->

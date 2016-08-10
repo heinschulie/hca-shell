@@ -1,11 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, ApplicationRef } from '@angular/core';
+import { ActivatedRoute, ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
+
+import { CommonService } from './shared'; 
+import { PropertyService } from './shared'; 
+import { WishlistService } from './shared'; 
+import { ScorecardService } from './shared'; 
+// import { UserService } from './shared'; 
+
+import { PropertyStateService } from './shared'; 
+import { ScorecardStateService } from './shared'; 
+import { UserStateService } from './shared'; 
+import { WishlistStateService } from './shared'; 
+
+import { MD_TABS_DIRECTIVES } from '@angular2-material/tabs'; 
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
+import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
+import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
+import { MD_CHECKBOX_DIRECTIVES } from '@angular2-material/checkbox';
+import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
+
+import { AuthGuard }     from './shared'; 
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  styleUrls: ['app.component.css'],
+  directives: [ 
+    ROUTER_DIRECTIVES,
+    MD_LIST_DIRECTIVES,
+    MD_TABS_DIRECTIVES, 
+    MD_SIDENAV_DIRECTIVES, 
+    MD_TOOLBAR_DIRECTIVES, 
+    MD_BUTTON_DIRECTIVES, 
+    MD_CHECKBOX_DIRECTIVES, 
+    MD_ICON_DIRECTIVES ],
+  providers: [
+    AuthGuard, 
+    //CommonService,
+    MdIconRegistry,
+    //UserService, 
+    PropertyStateService, 
+    PropertyService, 
+    WishlistService, 
+    ScorecardService, 
+    ScorecardStateService,
+    WishlistStateService
+  ]
 })
 export class AppComponent {
-  title = 'app works!';
+  title = '...';
+  errorMessage: any; 
+
+ // This constructor code is a temporary fix for this issue: https://github.com/angular/angular/issues/9565
+ 
+    // constructor(public commonService: CommonService, private _applicationRef: ApplicationRef, private _router: Router) {
+        // if(this.isMac()) {
+        //     _router.events.subscribe(ev => {
+        //         if(ev instanceof NavigationEnd) {
+        //             setTimeout(() => {
+        //                 _applicationRef.zone.run(() => _applicationRef.tick())
+        //             }, 500)
+        //         }
+        //     })
+        // }
+    constructor(public commonService: CommonService, public userState: UserStateService) {
+        this.commonService.title$.subscribe(
+			data => { this.title = data; },
+			error => this.errorMessage = <any>error);
+    }
+
+    isMac() {
+        if(navigator.userAgent.indexOf('Mac') > -1) {
+            return true
+        }
+        return false
+    }
+
+    logout() : void {
+        this.userState.logout(); 
+    }
 }

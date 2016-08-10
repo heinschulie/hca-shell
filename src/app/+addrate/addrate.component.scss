@@ -1,0 +1,115 @@
+@import '../styles/colors.scss'; 
+
+md-card.stepper-card{
+    min-height: 100vh;
+    padding-bottom: 15vh;
+}
+.clearfix{
+    &:before, &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+.stepper-title{
+    margin-top: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .title{
+        text-transform: uppercase; 
+        flex: 1; 
+        padding-left: 2vw; 
+    }
+}
+// .stepper-title.rate-title{
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: flex-start;
+
+//     .title{
+//         flex: 1; 
+//         padding-left: 2vw; 
+//     }
+// }
+.arr-camera{
+    background: $dark-primary-color; 
+    color: $white; 
+}
+
+.stepper-icon{
+    color: $white; 
+}
+
+.stepper-icon-inactive{
+    background-color: $divider-color; 
+}
+.stepper-icon-active{
+    background-color: $green; 
+}
+
+.stepper-detail-container{
+    margin-left: 5.5vw;
+    margin-right: 5vw;
+    padding-left: 10%;
+}
+.stepper-detail-container.rate-container{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.stepper-border{
+    border-left: 2px dotted $divider-color;
+}
+
+
+// ADD SECTION 
+.add-form{
+    display: flex;
+    flex-flow: column;
+
+    md-input{
+        flex: 1; 
+    }
+}
+.add-button{
+    align-self: flex-end; 
+}
+
+.property-container{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    font-size: 14px;
+    font-weight: 500;
+    
+    .property-details{
+        flex-flow: row wrap;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .property-address{
+        display: flex;
+        margin-bottom: 1vh;
+    }
+    .property-price{
+        display: flex;
+    }
+    .property-breakdown{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .property-breakdown-detail {
+        margin-left: 5%;
+    }
+}
+
+// IMAGE SECTION
+
+// REVIEW SECTION
+

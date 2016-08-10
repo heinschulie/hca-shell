@@ -1,0 +1,55 @@
+@import '../styles/colors.scss'; 
+
+.register-card{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
+  background-color: $primary-color;
+
+}
+
+.register-card-content{
+    flex: 1;
+    display: flex;
+    width: 100%;
+    align-self: center;
+    align-items: center;
+}
+
+.register-form{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-flow: column;
+  width: 85%;
+  background: $white;
+  border-radius: 0 10% 10% 0;
+  align-items: flex-start;
+  padding: 10% 0 10% 5%;
+}
+
+.next-button{
+    margin-top: 3vh;
+    align-self: flex-start;
+    color: $white;
+    background-color: $dark-primary-color;
+}
+
+.form-input .md-list-item{
+  width: 80%; 
+  height:40px;
+  font-size: 12px;
+  color: $accent-color;  
+}
+
+.br-slab {
+    width: 40%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    align-self: flex-end;
+}
+
+.login-link{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
