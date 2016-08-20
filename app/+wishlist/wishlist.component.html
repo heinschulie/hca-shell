@@ -2,13 +2,19 @@
 
 <md-card class="wishlist-card-container">
   <md-card-content>
-    <strong>Let’s prioritise..</strong> List up to 10 things (min 4) you would like to see in your new home. Below are some hints, click to personalise.
+    <strong>Let’s prioritise.</strong> List up to 10 things (min 4) you would like to see in your new home. Below are some hints, click to personalise.
   </md-card-content>
   <md-divider></md-divider>
   <app-hca-listitem *ngFor="let priority of wishlist?.priorities" 
                     [model]="priority" 
                     [slidermodel]="priority.weight" 
-                    context="Wishlist"></app-hca-listitem>
+                    context="Wishlist"
+                    (deleteItemEvent) = "onDeletePriority($event)"
+                    (updateItemEvent) = "onUpdateItem($event)"></app-hca-listitem>
   
-  <button md-button (click)="zero()">Add Priority</button>
+  <button md-button *ngIf="!showAddPriorityDialog" (click)="showAddPriorityDialog = !showAddPriorityDialog">Add Priority</button>
+  <div *ngIf="showAddPriorityDialog">
+    <md-input required [(ngModel)]="prioritydescription" name="prioritydescription" placeholder="Name your priority..."></md-input>
+    <button md-button *ngIf="showAddPriorityDialog" [disabled]="!prioritydescription" (click)="addPriority()">Save Priority</button>
+  </div>
 </md-card>

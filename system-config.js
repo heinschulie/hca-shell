@@ -107,6 +107,7 @@ var barrels = [
     'app/image-carousel',
     'app/image-slide',
     'app/image-uploader',
+    'app/autocomplete',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {

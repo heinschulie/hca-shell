@@ -30,12 +30,12 @@
   -->
 
   <!-- FOR WISHLIST -->
-  <div *ngIf="context === 'Wishlist'" class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" (click)="active = !active">
+  <div *ngIf="context === 'Wishlist'" class="list-title" [ngClass]="{ 'list-title-inactive' : !active }" >
     <span class="list-title-primary" [ngClass]="{ 'list-title-primary-valid' : data.weight }">{{data.weight}}</span>
     <span class="list-title-secondary" [ngClass]="{ 'list-title-secondary-inactive' : !active }">
-      <p>{{data.description}}</p>
+      <p (click)="active = !active">{{data.description}}</p>
       <md-icon *ngIf="!active && !data.weight" class="list-title-icon">create</md-icon>
-      <button md-button *ngIf="!active && !!data.weight" class="list-title-icon button">Delete</button>
+      <button md-button *ngIf="!active && !!data.weight" class="list-title-icon button" (click)="deleteItem()">Delete</button>
     </span>
   </div>
 
@@ -59,7 +59,7 @@
       </span>
     </md-card-subtitle>
     <app-hca-rangeinput context="{{context}}" [slidermodel]="data"></app-hca-rangeinput>
-    <button class="list-button" md-button (click)="test()">Done</button>
+    <button class="list-button" md-button (click)="updateItem()">Done</button>
     <md-divider></md-divider>
   </div>
 <!--</md-card>-->

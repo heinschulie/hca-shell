@@ -1,23 +1,25 @@
 .carousel {
+  position: relative;
   overflow: hidden;
   width: 100%; }
 
 .slides {
-  padding: 0;
-  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
-  /* Clear floats */
-  /* Slide effect Animations*/
-  -moz-animation: carousel 30s infinite;
-  -webkit-animation: carousel 30s infinite;
-  animation: carousel 30s infinite; }
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2px;
+  list-style: none;
+  background-color: #212121;
+  transition: 0.3s; }
 
 .slides > li {
   box-sizing: border-box;
   position: relative;
-  float: left;
-  border: 1px solid red; }
+  float: left; }
 
 .carousel img {
   display: block;
@@ -36,3 +38,23 @@
   color: #fff;
   background-color: rgba(0, 0, 0, 0.75);
   text-transform: uppercase; }
+
+.carousel-pointer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  height: 10%;
+  width: 12.5%;
+  background: rgba(0, 0, 0, 0.5);
+  transform: translate(0, -50%);
+  color: white; }
+
+.pointer-left {
+  left: 0;
+  border-radius: 0 10px 10px 0; }
+
+.pointer-right {
+  right: 0;
+  border-radius: 10px 0 0 10px; }

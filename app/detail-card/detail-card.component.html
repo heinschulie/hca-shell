@@ -1,7 +1,7 @@
 
 
 <md-card> 
-  <img md-card-image src="https://res.cloudinary.com/propertyvr/image/upload/v1460976380/Ludwig_Lounge_nfsodj.jpg">
+  <img md-card-image [src]="scorecard.featuredimage.url">
   <div class="mother">
     <!--<div class="sync-container">
       <div class="sync-indicator"></div>
@@ -12,7 +12,7 @@
           <span class="expander"></span>
           <div class="child2">
             <md-icon>camera</md-icon>
-            14
+            {{scorecard.media.length}} 
           </div>
         </div>
         <div class="child3">

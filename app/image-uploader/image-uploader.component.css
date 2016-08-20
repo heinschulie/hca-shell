@@ -11,3 +11,10 @@ md-card {
 
 .image-uploader-container {
   display: flex; }
+
+.image-uploader-button {
+  font-size: 12px; }
+
+.arr-camera {
+  background: #a1e8dd;
+  color: #FFFFFF; }
