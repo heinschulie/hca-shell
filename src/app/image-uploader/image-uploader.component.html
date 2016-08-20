@@ -1,5 +1,9 @@
 <div class="image-uploader-container">
-    <input type="file" name="file" id="file" class="inputfile" (change)="onChange($event)"/>
-    <label for="file" md-button>Choose a file</label>
-    <button md-button [disabled]="!file" (click)="createSignature()">Upload</button>
+    <input *ngIf="form === 'card'" type="file" name="cfile" id="cfile" class="inputfile" (change)="onChange($event)"/>
+    <input *ngIf="form === 'fab'" type="file" name="ffile" id="ffile" class="inputfile" (change)="onChange($event)"/>
+    <label *ngIf="form === 'card'" for="cfile" md-button class="image-uploader-button">Choose a file</label>
+    <label *ngIf="form === 'fab'" for="ffile" md-fab class="arr-camera"> 
+      <md-icon>add_a_photo</md-icon>
+    </label>
+    <button *ngIf="autonomousUpload" class="image-uploader-button" md-button [disabled]="!file" (click)="createSignature()">Upload</button>
 </div>

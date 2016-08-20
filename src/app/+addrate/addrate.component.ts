@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm, FORM_DIRECTIVES } from '@angular/forms';
 
@@ -7,17 +7,21 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input'
 import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 
 import { CommonService } from '../shared'; 
 import { WishlistStateService } from '../shared'; 
 import { Property } from '../shared'; 
 import { Wishlist } from '../shared'; 
 import { Scorecard } from '../shared'; 
+import { Media } from '../shared'; 
 import { PropertyStateService } from '../shared'; 
 import { ScorecardStateService } from '../shared'; 
+import { MediaStateService } from '../shared'; 
 
 import { HcaListitemComponent } from '../hca-listitem'; 
 import { ImageUploaderComponent } from '../image-uploader'; 
+import { AutocompleteComponent } from '../autocomplete'; 
 
 @Component({
   moduleId: module.id,
@@ -27,12 +31,14 @@ import { ImageUploaderComponent } from '../image-uploader';
   directives: [
     FORM_DIRECTIVES,
     MD_CARD_DIRECTIVES, 
+    MD_GRID_LIST_DIRECTIVES,
     MD_INPUT_DIRECTIVES,
     MD_LIST_DIRECTIVES, 
     MD_BUTTON_DIRECTIVES, 
     MD_ICON_DIRECTIVES,
     HcaListitemComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    AutocompleteComponent
   ]
 })
 export class AddrateComponent implements OnInit {
@@ -40,6 +46,10 @@ export class AddrateComponent implements OnInit {
   private queryPropertyId: string;
   private queryScorecardId: string;
   
+  properties : Property[] = []; 
+  filteredList = [];
+  addressFragment = ''; 
+  scorecardImageUrl = ''; 
   scorecard: Scorecard; 
   wishlist: Wishlist; 
   errorMessage: any; 
@@ -48,7 +58,14 @@ export class AddrateComponent implements OnInit {
               private wishlistState : WishlistStateService,
               private commonService: CommonService,
               private propertyState: PropertyStateService, 
-              private scorecardState: ScorecardStateService) {}
+              private scorecardState: ScorecardStateService,
+              private mediaState: MediaStateService) {
+                this.propertyState.property$.subscribe(
+                  data => { 
+                    this.properties = data.toArray(); 
+                  },
+                  error => this.errorMessage = <any>error); // subscribe to exercises
+              }
 
   ngOnInit() {
     // Set the page title       
@@ -73,45 +90,243 @@ export class AddrateComponent implements OnInit {
           this.scorecardState.getScorecardById(this.queryScorecardId)
             .subscribe(scorecard => {
               this.scorecard = scorecard;
+              this.scorecardImageUrl = scorecard.featuredimage.url;
             }); 
-        else{
-          let newProperty = new Property('', '', false, new Date(), 0, 0, '', 0); 
-          this.scorecard = new Scorecard('', newProperty, this.wishlist, this.wishlist.owner, [], false); 
+        else{    
+          this.scorecard = Scorecard.returnNewEmptyInstance();
+          this.scorecard.wishlist = this.wishlist; 
+          this.scorecard.owner = this.wishlist.owner;   
         }
       });
   }
 
-  addNewProperty() : void {
-    console.log("Property added: " + this.scorecard.property); 
-    this.scorecard.property._id = "lsdjgfksdjfgldksj"; //FAKE TILL I BAKE IT
+  // addNewProperty() : void {
+  //   console.log("Property added: " + this.scorecard.property); 
+  //   this.scorecard.property._id = "lsdjgfksdjfgldksj"; //FAKE TILL I BAKE IT
     
+  // }
+  onUpdateScore($score) {
+    this.scorecardState.updateScore($score);  
+  }
+  
+  onFeaturedImageChange($event){
+    if(this.scorecard && this.scorecard.property){
+      // let media = Media.returnNewEmptyInstance();
+      // media.url = $event;
+      // media.type = 'image'; 
+      this.scorecardImageUrl = $event; //FAKE TILL I BAKE IT
+    }    
+  }
+  onMediaItemChange($event){
+    // let file = $event; 
+    if($event && this.scorecard._id){
+      let mediaInfo = { 
+        folder: 'Scorecards',
+        publicId: 'media-' + this.scorecard._id.toString(),
+        tags: 'media'
+      } 
+
+      this.mediaState.createSignature(mediaInfo)
+      .flatMap(signature => {
+        if(signature)
+          return this.mediaState.uploadImage(this.mediaState.currentFile, signature);
+      })
+      .flatMap(imageObject => {  
+        let newMedia = new Media(
+          '',
+          imageObject.secure_url,
+          '',
+          '',
+          'image',
+          new Date(),
+          'landscape',
+          false,
+          []
+        );
+        return this.scorecardState.addMediaItemToScorecard(this.scorecard, newMedia);
+      })
+      .subscribe(createdMedia => this.scorecard.media.push(createdMedia));
+
+
+      // this.mediaState.createSignature(mediaInfo)
+      // .flatMap(signature => {
+      //   if(signature)
+      //     return this.mediaState.uploadImage(this.mediaState.currentFile, signature);
+      // })
+      // .flatMap(imageObject =>{
+      //   let newMedia = new Media(
+      //     '',
+      //     imageObject.secure_url,
+      //     '',
+      //     '',
+      //     'image',
+      //     new Date(),
+      //     'landscape',
+      //     false,
+      //     []
+      //   );
+      //   return this.scorecardState.addMediaItemToScorecard(this.scorecard, newMedia);
+      // })
+      // .subscribe(createdMedia => {
+      //   if(createdMedia._id)
+      //     this.scorecard.media.push(createdMedia);
+      //   // this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
+      //   console.log("Succesfully updated media to scorecard."); 
+      //   // if(createdMedia){
+      //   //   createdMedia.subscribe(newMedia => {
+      //   //     if(newMedia._id)
+      //   //       this.scorecard.media.push(newMedia);
+      //   //     // this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
+      //   //     console.log("Succesfully updated media to scorecard."); 
+      //   //   }) 
+      //   // }      
+      // })
+    }
   }
 
-  onImageChange($event){
-    if(this.scorecard && this.scorecard.property)
-      this.scorecard.property.image = $event; //FAKE TILL I BAKE IT
+  saveScorecard() : void {
+    //See if this is a custom image
+    if(this.scorecardState.scorecardExists(this.scorecard.property.address)){
+      console.log("Scorecard already exists..."); 
+      return; 
+    }
+    if(this.scorecard.featuredimage.url === this.scorecardImageUrl){
+      if(this.scorecard._id)
+        this.scorecardState.updateScorecard(this.scorecard).subscribe(res => {
+          if(res) console.log("Scorecard was saved...");
+        })
+      else
+        this.scorecardState.createScorecard(this.scorecard).subscribe(res => {
+          if(res) console.log("Scorecard was saved...");
+        })
+    }
+    else{
+      if(this.mediaState.currentFile){
+        if(this.scorecard._id){
+          let mediaInfo = { 
+            folder: 'Scorecards',
+            publicId: this.scorecard._id.toString(),
+            tags: 'featuredimage'
+          } 
+          this.mediaState.createSignature(mediaInfo)
+          .flatMap(signature => {
+            if(signature)
+              return this.mediaState.uploadImage(this.mediaState.currentFile, signature);
+          })
+          .map(imageObject =>{
+            this.scorecard.featuredimage.url = imageObject.secure_url; 
+            //TODO - add all metadata
+            return this.mediaState.updateMedia(this.scorecard.featuredimage);
+          })
+          .subscribe(updatedMedia => {
+            if(updatedMedia){
+              updatedMedia.subscribe(value => {
+                this.scorecard.featuredimage = value;
+                this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
+                this.scorecardImageUrl = this.scorecard.featuredimage.url;
+                console.log("Succesfully updated existing scorecard with new image."); 
+              }) 
+            }      
+          })
+        }
+        else{
+          this.scorecardState.createScorecard(this.scorecard)
+          .flatMap((data) => {
+            if(data.signature){
+              this.scorecard = data.scorecard; 
+              return this.mediaState.uploadImage(this.mediaState.currentFile, data.signature); 
+            }
+          })
+          .map(imageObject =>{
+            //TODO - add all metadata
+            this.scorecard.featuredimage.url = imageObject.secure_url; 
+            return this.mediaState.updateMedia(this.scorecard.featuredimage);
+          })
+          .subscribe(updatedMedia => {
+            if(updatedMedia){
+              updatedMedia.subscribe(value => {
+                this.scorecard.featuredimage = value;
+                this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
+                this.scorecardImageUrl = this.scorecard.featuredimage.url;
+                console.log("Succesfully updated new scorecard with new image."); 
+              }) 
+            }      
+          })
+        }
+      }
+    }
   }
 
-  toggleAddComplete = false; 
-  toggleImageComplete = false; 
-  toggleRateComplete = false; 
+  // saveScorecard() : void {
+  //   //See if this is a custom image
+  //   if(this.scorecardState.scorecardExists(this.scorecard.property.address)){
+  //     console.log("Scorecard already exists..."); 
+  //     return; 
+  //   }
+  //   if(this.scorecard.featuredimage.url === this.scorecardImageUrl){
+  //     if(this.scorecard._id)
+  //       this.scorecardState.updateScorecard(this.scorecard).subscribe(res => {
+  //         if(res) console.log("Scorecard was saved...");
+  //       })
+  //     else
+  //       this.scorecardState.createScorecard(this.scorecard).subscribe(res => {
+  //         if(res) console.log("Scorecard was saved...");
+  //       })
+  //   }
+  //   else{
+  //     //Upload image and then upload scorecard 
+  //     let mediaInfo = { 
+  //       folder: 'Scorecards',
+  //       publicId: 'sc-' + this.scorecardState.scorecard$.toArray.length,
+  //       tags: 'sc-featuredimage'
+  //     } 
+  //     if(this.mediaState.currentFile)
+  //       this.mediaState.uploadImage(this.mediaState.currentFile, mediaInfo)
+  //       .subscribe(newMedia => {
+  //         this.scorecard.featuredimage = newMedia;
+  //         if(this.scorecard._id)
+  //           this.scorecardState.updateScorecard(this.scorecard).subscribe(res => {
+  //             if(res) console.log("Scorecard was saved...");
+  //           })
+  //         else
+  //           this.scorecardState.createScorecard(this.scorecard).subscribe(res => {
+  //             if(res) console.log("Scorecard was saved...");
+  //           })
+  //       })
+  //   }
+  // }
+
+  // toggleAddComplete = false; 
+  // toggleImageComplete = false; 
+  // toggleRateComplete = false; 
 
   addComplete() : boolean {
-    if(this.scorecard)
+    if(!!this.scorecard)
       return !!this.scorecard.property._id;
     else
-      return false;  
+      return false;
   }
   imageComplete() : boolean {
-    if(this.scorecard)
-      return !!this.scorecard.property.image;
+    if(!!this.scorecard)
+      return !!this.scorecard.property.featuredimage;
     else
-      return false;  
+      return false;
   }
   rateComplete() : boolean {
-    return this.toggleRateComplete; 
+    return false;
   }
 
+  scorecardStep() : string {
+    if(this.scorecard._id)
+      return 'saved';
+    else if(this.scorecard.property._id && this.scorecard.featuredimage.url)
+      return 'saveable';
+    else if(this.scorecard.property._id && !this.scorecard.featuredimage.url)
+      return 'requireimage';
+    else{
+      return 'requireproperty';
+    }
+  }
 
   addActive(): boolean {
     if (!this.imageActive() && !this.rateActive() && !this.addComplete())
@@ -122,6 +337,47 @@ export class AddrateComponent implements OnInit {
     return this.addComplete() && !this.imageComplete(); 
   }
   rateActive() : boolean {
-    return this.addComplete() && this.imageComplete() && !this.rateComplete(); 
+    return this.addComplete() && this.imageComplete() && !!this.scorecard._id; 
   }
+  
+  private autocompleteAvailableProperties() {
+    if(this.properties.length){
+      if (this.addressFragment !== ''){
+          this.filteredList = this.properties.filter(function(prop){
+              return prop.address.toLowerCase().indexOf(this.addressFragment.toLowerCase()) > -1;
+          }.bind(this));
+          if(!this.filteredList.length){
+            this.properties = [];
+            this.autocompleteAvailableProperties(); 
+          }         
+      }else{
+          this.filteredList = [];
+      }
+    }
+    else{
+      this.propertyState.getPropertyListByAddress(this.addressFragment);
+    }
+  }
+
+  debouncedAutocompleteProperties = this.commonService.debounce(this.autocompleteAvailableProperties, 250, false); 
+
+  select(item){
+      this.scorecard.property = item;
+      this.scorecard.featuredimage = item.featuredimage;
+      this.filteredList = [];
+  }
+
+  // handleClick(event){
+  //  var clickedComponent = event.target;
+  //  var inside = false;
+  //  do {
+  //      if (clickedComponent === this.elementRef.nativeElement) {
+  //          inside = true;
+  //      }
+  //     clickedComponent = clickedComponent.parentNode;
+  //  } while (clickedComponent);
+  //   if(!inside){
+  //       this.filteredList = [];
+  //   }
+  // }
 }

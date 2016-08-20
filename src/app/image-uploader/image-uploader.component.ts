@@ -1,55 +1,77 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input'
+import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
+
 import { CommonService } from '../shared'; 
-import { ImageService } from '../shared'; 
+import { MediaStateService } from '../shared'; 
+import { MediaService } from '../shared'; 
 
 @Component({
   moduleId: module.id,
   selector: 'app-image-uploader',
   templateUrl: 'image-uploader.component.html',
-  styleUrls: ['image-uploader.component.css']
+  styleUrls: ['image-uploader.component.css'],
+  directives: [
+    MD_CARD_DIRECTIVES,
+    MD_INPUT_DIRECTIVES,
+    MD_ICON_DIRECTIVES
+  ]
 })
 export class ImageUploaderComponent implements OnInit {
 
   file : File;
   dataurl : string; 
   //imageurl: string;
-
+  @Input('form') 
+    form: string; 
+  @Input('selfupload') 
+    autonomousUpload: boolean; 
+  @Output()
+  fileAvailable = new EventEmitter();
   @Output()
   imageUrlChange = new EventEmitter();
   
-  constructor(private common : CommonService, private imageService : ImageService) {}
+  constructor(private common : CommonService, 
+              private mediaStateService : MediaStateService,
+              private mediaService : MediaService) {}
 
   ngOnInit() {
   }
 
   onChange(event) {
     var files = event.srcElement.files;
-    this.file = files[0]; 
-    this.readAsDataURL(); 
+    this.mediaStateService.currentFile = files[0]; 
+    this.file = files[0];
     console.log(files);
+
+    if(this.form === 'card')
+      this.readAsDataURL(); 
+    else
+      this.fileAvailable.emit(true); 
   }
 
   createSignature() : void {
-    this.imageService.createSignature().subscribe((result) => {
-      let body = result.json(); 
-      if (body) {
-        console.log("Signature success I think: " + body); 
-        this.uploadImage(body); 
-      }
-      else{
-        console.log("Image failed to upload"); 
-      }
-    })
+    // this.mediaService.createSignature().subscribe((result) => {
+    //   let body = result.json(); 
+    //   if (body) {
+    //     console.log("Signature success I think: " + body); 
+    //     this.uploadImage(body); 
+    //   }
+    //   else{
+    //     console.log("Image failed to upload"); 
+    //   }
+    // })
   }
 
   uploadImage( signature : any ) : void {
     // this.imageService.uploadImage(this.dataurl, signature).subscribe((result) => {
-    this.imageService.uploadImage(this.file, signature).subscribe((result) => {
+    this.mediaService.uploadImage(this.file, signature).subscribe((result) => {
       if (result) {
         let body = result.json();
         console.log("Image success I think: " + result); 
@@ -81,8 +103,7 @@ export class ImageUploaderComponent implements OnInit {
       reader.onload = function(event : any) {
         // The file's text will be printed here
         console.log(event.target);
-        //that.imageurl = event.target.result;
-        that.imageUrlChange.emit(event.target.result);  
+        that.imageUrlChange.emit(event.target.result);     
       };
       reader.readAsDataURL(this.file);
   };

@@ -24,10 +24,10 @@ export class Slide implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        this.carousel.addSlide(this);
+        // this.carousel.addSlide(this);
     }
 
     public ngOnDestroy() {
-        this.carousel.removeSlide(this);
+        // this.carousel.removeSlide(this);
     }
 }

@@ -3,13 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from '../shared';
 import { Scorecard } from '../shared'; 
 import { ScorecardStateService } from '../shared'; 
+import { MediaStateService } from '../shared'; 
+import { Media } from '../shared'; 
 import { DetailCardComponent } from '../detail-card'; 
 
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
+import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
+
+import { Slide } from '../image-slide';
+import { ImageCarouselComponent } from '../image-carousel';
 
 import { HcaListitemComponent } from '../hca-listitem';
 
@@ -24,6 +29,8 @@ import { HcaListitemComponent } from '../hca-listitem';
     MD_BUTTON_DIRECTIVES, 
     MD_ICON_DIRECTIVES,
     MD_GRID_LIST_DIRECTIVES,
+    ImageCarouselComponent,
+    Slide,
     DetailCardComponent,
     HcaListitemComponent]
 })
@@ -35,7 +42,11 @@ export class ReviewComponent implements OnInit {
   constructor(private commonService: CommonService,
               private route: ActivatedRoute,
               private router: Router,
-              private _scorecardState: ScorecardStateService) { }
+              private _scorecardState: ScorecardStateService,
+              private mediaState: MediaStateService) { 
+                if(typeof this.scorecard === "undefined")
+                  this.scorecard = Scorecard.returnNewEmptyInstance(); 
+              }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -47,7 +58,10 @@ export class ReviewComponent implements OnInit {
 				error => this.errorMessage = <any>error);
     });
     this.commonService.setTitle("Review");
+  }
 
+  selectMedia(media : Media){
+    this.mediaState.setCurrentMedia(media); 
   }
 
 }

@@ -1,4 +1,4 @@
-
+@import '../styles/colors.scss'; 
 
 .inputfile {
 	width: 0.1px;
@@ -15,4 +15,13 @@ md-card{
 
 .image-uploader-container{
 	display: flex; 
+}
+
+.image-uploader-button{
+	font-size: 12px;
+}
+
+.arr-camera{
+    background: $green; 
+    color: $white; 
 }

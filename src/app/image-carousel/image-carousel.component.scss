@@ -1,24 +1,28 @@
+@import '../styles/colors.scss'; 
+
 .carousel{
+    position: relative; 
     overflow:hidden;
     width:100%;
 }
 .slides{
-    padding: 0;
-    list-style:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position:relative;
-    //width:500%; /* Number of panes * 100% */
-    overflow:hidden; /* Clear floats */
-        /* Slide effect Animations*/
-    -moz-animation:carousel 30s infinite;
-    -webkit-animation:carousel 30s infinite;
-    animation:carousel 30s infinite;
+    overflow: hidden; 
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2px;
+    list-style:none;
+    background-color: $black; 
+    transition: 0.3s; 
 }
 .slides > li{
     box-sizing: border-box;
     position:relative;
     float:left;
     //width: 20%; /* 100 / number of panes */
-    border: 1px solid red;
 }
 .carousel img{
     display:block;
@@ -39,22 +43,24 @@
     text-transform: uppercase;
 }
 
-// @keyframes carousel{
-//     0%    { left:-5%; }
-//     11%   { left:-5%; }
-//     12.5% { left:-105%; }
-//     23.5% { left:-105%; }
-//     25%   { left:-205%; }
-//     36%   { left:-205%; }
-//     37.5% { left:-305%; }
-//     48.5% { left:-305%; }
-//     50%   { left:-405%; }
-//     61%   { left:-405%; }
-//     62.5% { left:-305%; }
-//     73.5% { left:-305%; }
-//     75%   { left:-205%; }
-//     86%   { left:-205%; }
-//     87.5% { left:-105%; }
-//     98.5% { left:-105%; }
-//     100%  { left:-5%; }
-// }
+.carousel-pointer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    height: 10%;
+    width: 12.5%;
+    background: rgba(0,0,0,0.5);
+    transform: translate(0,-50%); 
+    color: white;
+}
+
+.pointer-left{
+    left: 0; 
+    border-radius: 0 10px 10px 0;
+}
+.pointer-right{
+    right: 0; 
+    border-radius: 10px 0 0 10px;
+}

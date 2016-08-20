@@ -112,6 +112,7 @@ const barrels: string[] = [
   'app/image-carousel',
   'app/image-slide',
   'app/image-uploader',
+  'app/autocomplete',
   /** @cli-barrel */
 ];
 

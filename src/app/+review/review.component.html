@@ -17,23 +17,9 @@
                     [slidermodel]="score.score" 
                     context="Scorecard"></app-hca-listitem>
 </md-card>
-<md-grid-list cols="3" [style.background]="'lightblue'">
-  <md-grid-tile>
-    <img class="grid-list-image" src="https://res.cloudinary.com/propertyvr/image/upload/v1460976380/Ludwig_Lounge_nfsodj.jpg" />
-  </md-grid-tile>
-  <md-grid-tile>
-    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
-  </md-grid-tile>
-  <md-grid-tile>
-    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
-  </md-grid-tile>
-  <md-grid-tile>
-    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
-  </md-grid-tile>
-  <md-grid-tile>
-    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
-  </md-grid-tile>
-  <md-grid-tile>
-    <img class="grid-list-image" src="http://lorempixel.com/400/200/nature" />
+<app-image-carousel [images]="scorecard?.media"></app-image-carousel>
+<md-grid-list cols="3">
+  <md-grid-tile *ngFor="let media of scorecard?.media" (click)="selectMedia(media)">
+    <img class="grid-list-image" [src]="media.url" />
   </md-grid-tile>
 </md-grid-list>

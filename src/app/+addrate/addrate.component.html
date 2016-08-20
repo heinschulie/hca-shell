@@ -1,66 +1,96 @@
 <md-card class="stepper-card clearfix">
   <md-card-title class="stepper-title">
     <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : addActive() }">
-      <span *ngIf="!addComplete()" (click)="toggleAddComplete = !toggleAddComplete">1</span>
+      <span *ngIf="!addComplete()">1</span>
       <md-icon *ngIf="addComplete()">done</md-icon>
     </button> 
     <span class="title">Add</span>
   </md-card-title>
-  <div class="stepper-detail-container stepper-border" *ngIf="!queryPropertyId">
+  <div class="stepper-detail-container stepper-border" *ngIf="!scorecard?.property?._id">
     <form class="add-form" (ngSubmit)="addNewProperty()" #addForm="ngForm">
-      <md-input #address class="form-input" required [(ngModel)]="scorecard.property.address" name="address" placeholder="What is the address"></md-input>
-      <md-input #bedrooms class="form-input" required [(ngModel)]="scorecard.property.bedrooms" name="bedrooms" placeholder="Number of bedrooms?"></md-input>
-      <md-input #cost class="form-input" required [(ngModel)]="scorecard.property.cost" name="cost" placeholder="What is the asking price?"></md-input>
-      <button class="add-button" type="submit"  [disabled]="!addForm.form.valid" md-raised-button>
-        Add
-      </button>
+      <md-input #address class="form-input" required [(ngModel)]="addressFragment" name="address" placeholder="What is the address" (keyup)=debouncedAutocompleteProperties()></md-input>
+      <md-list *ngIf="filteredList.length > 0">
+        <md-list-item *ngFor="let property of filteredList" (click)="select(property)">
+          <img md-list-avatar [src]="property.featuredimage?.url" alt="...">
+          <h5 md-line> {{property.address}} </h5>
+          <p md-line>
+            <span> {{property.bedrooms}} Rooms </span>
+            <span class="property-info"> -- {{property.tags}} </span>
+          </p>
+        </md-list-item>
+      </md-list>
     </form>
   </div>
-  <div class="stepper-detail-container stepper-border" *ngIf="queryPropertyId">
+  <div class="stepper-detail-container stepper-border" *ngIf="scorecard?.property?._id">
     <div class="property-container">
       <div class="property-details">
           <div class="property-address">
             {{scorecard?.property?.address}}  
           </div>
           <div class="property-price">
-            {{scorecard?.property?.cost}}  
+            R {{scorecard?.property?.cost}}  
             <div class="property-breakdown">     
               <span class="property-breakdown-detail">
-                {{scorecard?.property?.bedrooms}}  
+                {{scorecard?.property?.bedrooms}} Bed  
               </span>
-              <span class="property-breakdown-detail">145 sqm</span> 
+              <span class="property-breakdown-detail">{{scorecard?.property?.floorarea}} sqm</span> 
             </div> 
           </div>
       </div>
     </div>
   </div>
-  <md-card-title class="stepper-title">  <!--(click)="imageActive = !imageActive"-->
+  <md-card-title class="stepper-title">  
     <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : imageActive() }">
-      <span *ngIf="!imageComplete()" (click)="toggleImageComplete = !toggleImageComplete">2</span>
-      <md-icon *ngIf="imageComplete()">done</md-icon>
+      <span *ngIf="!scorecard?.property?.featuredimage?.url">2</span>
+      <md-icon *ngIf="scorecard?.property?.featuredimage?.url">done</md-icon>
     </button> 
     <span class="title">Key Image</span>
   </md-card-title>
-  <div class="stepper-detail-container stepper-border"> <!--*ngIf="imageActive()"-->
-    <md-card>
-      <img md-card-image [src]="scorecard?.property?.image">
-      <app-image-uploader (imageUrlChange) = "onImageChange($event)"></app-image-uploader>
+  <div class="stepper-detail-container stepper-border">
+    <md-card *ngIf="scorecard?.property?.featuredimage?.url">
+      <img md-card-image [src]="scorecardImageUrl">
+      <app-image-uploader 
+        [chosenfile]="mediafile" 
+        [selfupload]="false" 
+        form="card" 
+        (imageUrlChange) = "onFeaturedImageChange($event)"
+        >
+      </app-image-uploader>
     </md-card>
   </div>
-  <md-card-title class="stepper-title"> <!--(click)="rateActive = !rateActive"-->
+  <div class="stepper-photo-button-container" *ngIf="!scorecard?._id || scorecardImageUrl !== scorecard.featuredimage.url">
+    <button md-raised-button 
+            class="arr-save" 
+            [disabled]="!scorecard?._id && !scorecard?.featuredimage?.url" 
+            (click)="saveScorecard()"
+            *ngIf="scorecard?.property?._id">
+      Save
+    </button>
+  </div>
+  <md-card-title class="stepper-title"> 
     <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : rateActive() }">
-      <span *ngIf="!rateComplete()" (click)="toggleRateComplete = !toggleRateComplete">3</span>
+      <span *ngIf="!rateComplete()">3</span>
       <md-icon *ngIf="rateComplete()">done</md-icon>
     </button> 
     <span class="title">Rate</span>
-    <button md-raised-button class="arr-camera" [disabled]="!rateActive()">
-      <!--<md-icon class="md-24">photo_camera</md-icon>--> Take Picture
-    </button>
+    
   </md-card-title>
-  <div class="stepper-detail-container rate-container" *ngIf="rateActive()"> <!---->
+  <div class="stepper-detail-container rate-container" *ngIf="rateActive()"> 
     <app-hca-listitem *ngFor="let score of scorecard?.scores" 
                     [model]="score" 
-                    [slidermodel]="score.score" 
-                    context="Scorecard"></app-hca-listitem>
+                    [slidermodel]="score.score"
+                    context="Scorecard"
+                    (updateItemEvent) = "onUpdateScore($event)"></app-hca-listitem>
+  </div>
+  <div class="stepper-photo-button-container" *ngIf="scorecard?._id">
+    <!--<button md-fab class="arr-camera" [disabled]="!rateActive()" *ngIf="scorecard?._id">
+      <md-icon>add_a_photo</md-icon>
+    </button>-->
+    <app-image-uploader 
+      [selfupload]="false" 
+      form="fab" 
+      (imageUrlChange) = "onMediaItemChange($event)"
+      (fileAvailable) = "onMediaItemChange($event)">
+    </app-image-uploader>
   </div>
 </md-card>

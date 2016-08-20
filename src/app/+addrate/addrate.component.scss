@@ -3,6 +3,7 @@
 md-card.stepper-card{
     min-height: 100vh;
     padding-bottom: 15vh;
+    display: flex; 
 }
 .clearfix{
     &:before, &:after {
@@ -35,8 +36,13 @@ md-card.stepper-card{
 //     }
 // }
 .arr-camera{
-    background: $dark-primary-color; 
+    background: $green; 
     color: $white; 
+}
+.arr-save{
+    background: $dark-primary-color; 
+    color: $white;
+    margin: 2vh 0; 
 }
 
 .stepper-icon{
@@ -64,6 +70,10 @@ md-card.stepper-card{
     border-left: 2px dotted $divider-color;
 }
 
+.stepper-photo-button-container{
+    display: flex;
+    justify-content: flex-end;
+}
 
 // ADD SECTION 
 .add-form{
@@ -82,7 +92,7 @@ md-card.stepper-card{
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     
     .property-details{

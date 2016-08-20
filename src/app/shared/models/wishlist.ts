@@ -15,4 +15,9 @@ export class Wishlist {
         this.priorities = priorities;
         this.owner = owner;
     }
+
+    public static returnNewEmptyInstance() {
+        let newWishlist = new Wishlist('', '', [], ''); 
+        return newWishlist;
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
 import { HcaRangeinputComponent } from '../hca-rangeinput';
@@ -18,6 +18,8 @@ import { HcaRangeinputComponent } from '../hca-rangeinput';
 })
 export class HcaListitemComponent implements OnInit {
 
+  @Output() deleteItemEvent = new EventEmitter();
+  @Output() updateItemEvent = new EventEmitter(); 
   @Input('context') context: string; 
   @Input('model') data: any; 
   // @Input('model-title') title: string; 
@@ -31,4 +33,10 @@ export class HcaListitemComponent implements OnInit {
     console.log("Item model is: " + this.data);
   }
 
+  deleteItem() {
+    this.deleteItemEvent.emit(this.data);
+  }
+  updateItem() {
+    this.updateItemEvent.emit(this.data); 
+  }
 }

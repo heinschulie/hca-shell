@@ -33,4 +33,34 @@ export class WishlistService {
   getPriority ( priorityId : string ): Observable<Response> {
     return this.http.get(this._url + 'priorities/' + priorityId);
   }
+
+  addPriority ( priority : any ): Observable<Response> {
+    let url = this._url + 'priorities';
+    let body = JSON.stringify(priority);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http
+    .post(
+        url,  
+        body, 
+        { headers }
+      );
+  }
+
+  deletePriority ( priorityId : string ): Observable<Response> {
+    return this.http.delete(this._url + 'priorities/' + priorityId);
+  }
+
+  updatePriorityWeight( priority : any ): Observable<Response> {
+    let url = this._url + 'priorities';
+    let body = JSON.stringify(priority);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http
+    .put(
+        url,  
+        body, 
+        { headers }
+      );
+  }
 }

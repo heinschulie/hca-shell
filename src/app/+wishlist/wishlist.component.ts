@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
@@ -21,6 +22,7 @@ import { HcaListitemComponent } from '../hca-listitem';
   directives: [ 
     MD_CARD_DIRECTIVES, 
     MD_LIST_DIRECTIVES, 
+    MD_INPUT_DIRECTIVES, 
     MD_BUTTON_DIRECTIVES, 
     MD_ICON_DIRECTIVES, 
     HcaListitemComponent ]
@@ -33,6 +35,8 @@ export class WishlistComponent implements OnInit {
   errorMessage: string;
   wishlist: Wishlist;
   mode = 'Observable';
+  showAddPriorityDialog : boolean = false;
+  prioritydescription : string = "";  
 
   ngOnInit() { 
     //Subscribe to wishlistate
@@ -51,5 +55,27 @@ export class WishlistComponent implements OnInit {
     })
   }
 
+  onDeletePriority($event): void {
+    if(this.wishlist.priorities.length > 1){
+      let priority = $event; 
+		  this.wishlistState.deletePriority(priority); // TODO    
+    }
+    else
+      alert("Have to have one priority."); 
+	}
+
+  addPriority() {
+    if(this.prioritydescription)
+      this.wishlistState.addPriority(this.prioritydescription, this.wishlist._id); 
+  }
+
+  private updatePriorityWeight(priority){
+    this.wishlistState.updatePriorityWeight(priority);
+  }
+
+  onUpdateItem($priority) {
+    // this.commonService.debounce(this.updatePriorityWeight($priority), 250, false);
+    this.wishlistState.updatePriorityWeight($priority);  
+  }
 
 }

@@ -6,7 +6,8 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 
 import { CommonService } from './app/shared'; 
-import { ImageService } from './app/shared'; 
+import { MediaService } from './app/shared'; 
+import { MediaStateService } from './app/shared'; 
 import { UserService } from './app/shared'; 
 import { UserStateService } from './app/shared/'; 
 
@@ -18,7 +19,8 @@ bootstrap(AppComponent, [
     disableDeprecatedForms(),
     provideForms(),
     CommonService, 
-    ImageService,
+    MediaService,
+    MediaStateService,
     UserService,
     UserStateService, 
     HTTP_PROVIDERS,

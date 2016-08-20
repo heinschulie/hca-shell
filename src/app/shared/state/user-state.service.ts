@@ -10,6 +10,9 @@ import { CommonService } from '../services/common.service';
 import { UserService } from '../services/user.service'; //Give full pathname for classes that are used in constructors 
 import { User } from '../'; 
 import { Wishlist } from '../'; 
+import { Priority } from '../'; 
+import { Scorecard } from '../'; 
+import { Score } from '../'; 
 
 
 @Injectable()
@@ -23,6 +26,8 @@ import { Wishlist } from '../';
       this.loadUser(); 
     }
     else{
+      let wishlist = Wishlist.returnNewEmptyInstance();
+      this._user$.next(new User('', '', '', 'Bernard', '', wishlist, [], [], false));
       this.setAuthStatus(false); 
     }
   }
@@ -51,7 +56,10 @@ import { Wishlist } from '../';
                     this._user$.next(user);
                     this.setAuthStatus(true); 
                 },
-                err => this.handleError(err)
+                err => {
+                console.log("Log in did not succeed! Message: " + err); 
+                this.setAuthStatus(false); 
+              }
             );
   }
 
@@ -65,7 +73,7 @@ import { Wishlist } from '../';
         if (res.success) {
           //localStorage.removeItem('asc_auth_token');
           localStorage.setItem('hca_auth_token', res.auth_token);
-          this._user$ = new BehaviorSubject(new User(
+          let user = new User(
             res.user._id, 
             res.user.firstName,
             res.user.lastName,
@@ -75,7 +83,8 @@ import { Wishlist } from '../';
             res.user.roles,
             res.user.scorecards,
             true
-          )); 
+          ); 
+          this._user$.next(user);
           this.setAuthStatus(true); 
         }
         else{
@@ -141,16 +150,70 @@ import { Wishlist } from '../';
       .catch(this.handleError);
   }
 
-  // WISHLIST 
+  // WISHLIST AND SCORECARDS 
 
-  updateUserWishlist(newWishlist : Wishlist){
-    
+  updateUserWishlistandScorecards(newWishlist : Wishlist, updatedScorecardCollection: Scorecard []) : Observable<boolean>{
+    console.log("SCORECARD COLLECTION: " + updatedScorecardCollection); 
     let user = this._user$.getValue(); 
     user.wishlist = newWishlist; 
+    user.scorecards = updatedScorecardCollection; 
     this._user$.next(user); 
+    return Observable.of(true); 
   }
 
+  addScorecardToUserScorecards(newScorecard: Scorecard) : Observable<boolean>{
+    let user = this._user$.getValue(); 
+    user.scorecards.push(newScorecard); 
+    this._user$.next(user); 
+    return Observable.of(true); 
+  }
 
+  updateExistingScorecardInUserScorecards(updatedScorecard : Scorecard) : Observable<boolean>{
+    let user = this._user$.getValue(); 
+    for(var i = user.scorecards.length - 1; i > -1; i--){
+      let currentSc = user.scorecards[i]; 
+      if(currentSc._id === updatedScorecard._id){
+        user.scorecards.splice(i, 1);
+        user.scorecards.push(updatedScorecard);
+        break; 
+      }
+    }
+    this._user$.next(user); 
+    return Observable.of(true); 
+  }
+
+  updateUserCollectionsWithNewPriority(updatedPriority : Priority) : Observable<boolean>{
+    let user = this._user$.getValue(); 
+    for(var i = user.wishlist.priorities.length - 1; i > -1; i--){
+      let currentPriority = user.wishlist.priorities[i]; 
+      if(currentPriority._id === updatedPriority._id){
+        user.wishlist.priorities.splice(i, 1);
+        user.wishlist.priorities.push(updatedPriority);
+        break; 
+      }
+    }
+    this._user$.next(user); 
+    return Observable.of(true); 
+  }
+  updateUserCollectionsWithNewScore(updatedScore : Score) : Observable<boolean>{
+    let user = this._user$.getValue(); 
+    user.scorecards.forEach(function(scorecard){
+      if(scorecard._id === updatedScore.scorecard){
+        for(var i = scorecard.scores.length - 1; i > -1; i--){
+          let currentscore = scorecard.scores[i]; 
+          if(currentscore._id === updatedScore._id){
+            scorecard.scores.splice(i, 1);
+            scorecard.scores.push(updatedScore);
+            break; 
+          }
+        }
+      }
+    })  
+    this._user$.next(user); 
+    return Observable.of(true); 
+  }
+
+  // ERROR HANDLING
 
   private extractData(res: Response) {
     let body = res.json();
