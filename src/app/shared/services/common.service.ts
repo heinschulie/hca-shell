@@ -9,10 +9,10 @@ import { Wishlist } from "../"
 @Injectable()
 export class CommonService {
   
-  private _loginUrl = 'http://localhost:4040/login';
-  private _homechoiceUrl = 'http://localhost:4040/api/';  // URL to web api
-  // private _loginUrl = 'https://cryptic-journey-27223.herokuapp.com/login';
-  // private _homechoiceUrl = 'https://cryptic-journey-27223.herokuapp.com/api/';
+  // private _loginUrl = 'http://localhost:4040/login';
+  // private _homechoiceUrl = 'http://localhost:4040/api/';  // URL to web api
+  private _loginUrl = 'https://cryptic-journey-27223.herokuapp.com/login';
+  private _homechoiceUrl = 'https://cryptic-journey-27223.herokuapp.com/api/';
 
   private _title$: BehaviorSubject<string> = new BehaviorSubject('');
   public title$ : Observable<string> = this._title$.asObservable();
