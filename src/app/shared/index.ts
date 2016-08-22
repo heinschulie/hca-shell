@@ -12,6 +12,7 @@ export * from './services/common.service';
 export * from './services/media.service';
 export * from './services/property.service';
 export * from './services/scorecard.service';
+export * from './services/toastr.service';
 export * from './services/user.service';
 export * from './services/wishlist.service';
 export * from './state/media-state.service';

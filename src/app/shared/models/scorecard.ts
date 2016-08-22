@@ -22,13 +22,17 @@ export class Scorecard {
                 featuredimage: Media,
                 media: Media[],
                 active: boolean){
+        
+        let newFeaturedImage = Media.newInstance(featuredimage); 
+        let mediaArray = Media.newArray(media); 
+
         this._id = _id; 
         this.property = property;
         this.wishlist = wishlist;
         this.owner = owner;
         this.scores = scores;
-        this.featuredimage = featuredimage;
-        this.media = media;
+        this.featuredimage = newFeaturedImage;
+        this.media = mediaArray;
         this.active = active; 
     }
 
@@ -39,5 +43,26 @@ export class Scorecard {
         let newWishlist = Wishlist.returnNewEmptyInstance(); 
         let newScorecard = new Scorecard('', newProperty, newWishlist, '', [], newMedia, [], false); 
         return newScorecard; 
+    }
+
+    public static newInstance(scorecard : any) : Scorecard{
+        return new Scorecard(
+                scorecard._id,
+                scorecard.property,
+                scorecard.wishlist,
+                scorecard.owner,
+                scorecard.scores,
+                scorecard.featuredimage,
+                scorecard.media,
+                scorecard.active
+            );
+    }
+
+    public static newArray(scorecard : any[]) : Scorecard[]{
+        let newarray : Scorecard[] = [];
+        scorecard.forEach(m => {
+            newarray.push(this.newInstance(m)); 
+        })
+        return newarray; 
     }
 }

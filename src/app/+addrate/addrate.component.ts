@@ -8,6 +8,7 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input'
 import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
+import { MD_PROGRESS_BAR_DIRECTIVES } from '@angular2-material/progress-bar'; 
 
 import { CommonService } from '../shared'; 
 import { WishlistStateService } from '../shared'; 
@@ -36,6 +37,7 @@ import { AutocompleteComponent } from '../autocomplete';
     MD_LIST_DIRECTIVES, 
     MD_BUTTON_DIRECTIVES, 
     MD_ICON_DIRECTIVES,
+    MD_PROGRESS_BAR_DIRECTIVES, 
     HcaListitemComponent,
     ImageUploaderComponent,
     AutocompleteComponent
@@ -53,6 +55,7 @@ export class AddrateComponent implements OnInit {
   scorecard: Scorecard; 
   wishlist: Wishlist; 
   errorMessage: any; 
+  inProgress: boolean; 
 
   constructor(private router: Router, 
               private wishlistState : WishlistStateService,
@@ -119,10 +122,11 @@ export class AddrateComponent implements OnInit {
   }
   onMediaItemChange($event){
     // let file = $event; 
+    this.inProgress = true;  
     if($event && this.scorecard._id){
       let mediaInfo = { 
         folder: 'Scorecards',
-        publicId: 'media-' + this.scorecard._id.toString(),
+        publicId: 'media-' + this.scorecard._id.toString() + '-' + this.scorecard.media.length,
         tags: 'media'
       } 
 
@@ -145,7 +149,10 @@ export class AddrateComponent implements OnInit {
         );
         return this.scorecardState.addMediaItemToScorecard(this.scorecard, newMedia);
       })
-      .subscribe(createdMedia => this.scorecard.media.push(createdMedia));
+      .subscribe(createdMedia => {
+        this.scorecard.media.push(createdMedia);
+        this.inProgress = false;  
+      });
 
 
       // this.mediaState.createSignature(mediaInfo)
@@ -186,18 +193,22 @@ export class AddrateComponent implements OnInit {
 
   saveScorecard() : void {
     //See if this is a custom image
+    this.inProgress = true;  
     if(this.scorecardState.scorecardExists(this.scorecard.property.address)){
-      console.log("Scorecard already exists..."); 
+      console.log("Scorecard already exists...");
+      this.inProgress = false;   
       return; 
     }
     if(this.scorecard.featuredimage.url === this.scorecardImageUrl){
       if(this.scorecard._id)
         this.scorecardState.updateScorecard(this.scorecard).subscribe(res => {
           if(res) console.log("Scorecard was saved...");
+          this.inProgress = false;  
         })
       else
         this.scorecardState.createScorecard(this.scorecard).subscribe(res => {
           if(res) console.log("Scorecard was saved...");
+          this.inProgress = false;  
         })
     }
     else{
@@ -224,6 +235,7 @@ export class AddrateComponent implements OnInit {
                 this.scorecard.featuredimage = value;
                 this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
                 this.scorecardImageUrl = this.scorecard.featuredimage.url;
+                this.inProgress = false;  
                 console.log("Succesfully updated existing scorecard with new image."); 
               }) 
             }      
@@ -248,6 +260,7 @@ export class AddrateComponent implements OnInit {
                 this.scorecard.featuredimage = value;
                 this.scorecardState.updateSingleScorecardInUserScorecards(this.scorecard); 
                 this.scorecardImageUrl = this.scorecard.featuredimage.url;
+                this.inProgress = false;  
                 console.log("Succesfully updated new scorecard with new image."); 
               }) 
             }      
@@ -364,6 +377,7 @@ export class AddrateComponent implements OnInit {
   select(item){
       this.scorecard.property = item;
       this.scorecard.featuredimage = item.featuredimage;
+      this.scorecardImageUrl = this.scorecard.featuredimage.economic_url;
       this.filteredList = [];
   }
 

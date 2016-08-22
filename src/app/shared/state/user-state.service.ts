@@ -42,17 +42,20 @@ import { Score } from '../';
             .subscribe(
                 res => {
                     let data = res.json(); 
-                    let user = new User(
-                          data._id, 
-                          data.firstName,
-                          data.lastName,
-                          data.username,
-                          data.image,
-                          data.wishlist,
-                          data.roles,
-                          data.scorecards,
-                          true
-                        );       
+                    data.isAuth = true; 
+                    let user = User.newInstance(data); 
+                    // let data = res.json(); 
+                    // let user = new User(
+                    //       data._id, 
+                    //       data.firstName,
+                    //       data.lastName,
+                    //       data.username,
+                    //       data.image,
+                    //       data.wishlist,
+                    //       data.roles,
+                    //       data.scorecards,
+                    //       true
+                    //     );       
                     this._user$.next(user);
                     this.setAuthStatus(true); 
                 },
@@ -71,19 +74,22 @@ import { Score } from '../';
       .map(res => res.json())
       .map((res) => {
         if (res.success) {
-          //localStorage.removeItem('asc_auth_token');
           localStorage.setItem('hca_auth_token', res.auth_token);
-          let user = new User(
-            res.user._id, 
-            res.user.firstName,
-            res.user.lastName,
-            res.user.username,
-            res.user.image,
-            res.user.wishlist,
-            res.user.roles,
-            res.user.scorecards,
-            true
-          ); 
+          
+          res.user.isAuth = true; 
+          let user = User.newInstance(res.user); 
+
+          // let user = new User(
+          //   res.user._id, 
+          //   res.user.firstName,
+          //   res.user.lastName,
+          //   res.user.username,
+          //   res.user.image,
+          //   res.user.wishlist,
+          //   res.user.roles,
+          //   res.user.scorecards,
+          //   true
+          // ); 
           this._user$.next(user);
           this.setAuthStatus(true); 
         }

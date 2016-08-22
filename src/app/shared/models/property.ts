@@ -22,13 +22,16 @@ export class Property {
 	            floorarea: number,
 	            marketstatus: string,
 	            webreference: string){
+
+        let newFeaturedImage = Media.newInstance(featuredimage); 
+
         this._id = _id; 
         this.address = address;
         this.featured = featured;
         this.published = published;
         this.bedrooms = bedrooms;
         this.cost = cost;
-        this.featuredimage = featuredimage;
+        this.featuredimage = newFeaturedImage;
         this.floorarea = floorarea;
         this.marketstatus = marketstatus;
         this.webreference = webreference;

@@ -53,19 +53,17 @@ export class AppComponent {
   title = '...';
   errorMessage: any; 
 
- // This constructor code is a temporary fix for this issue: https://github.com/angular/angular/issues/9565
- 
-    // constructor(public commonService: CommonService, private _applicationRef: ApplicationRef, private _router: Router) {
-        // if(this.isMac()) {
-        //     _router.events.subscribe(ev => {
-        //         if(ev instanceof NavigationEnd) {
-        //             setTimeout(() => {
-        //                 _applicationRef.zone.run(() => _applicationRef.tick())
-        //             }, 500)
-        //         }
-        //     })
-        // }
-    constructor(public commonService: CommonService, public userState: UserStateService) {
+    // This constructor code is a temporary fix for this issue: https://github.com/angular/angular/issues/9565
+    constructor(public commonService: CommonService, public userState: UserStateService, private _router: Router, _applicationRef: ApplicationRef) {
+        if(this.isMac()) {
+            _router.events.subscribe(ev => {
+                if(ev instanceof NavigationEnd) {
+                    setTimeout(() => {
+                        _applicationRef.zone.run(() => _applicationRef.tick())
+                    }, 500)
+                }
+            })
+        }
         this.commonService.title$.subscribe(
 			data => { this.title = data; },
 			error => this.errorMessage = <any>error);

@@ -101,16 +101,17 @@ export class ScorecardStateService {
       .map((body) => {
         if (body.data._id) {
           console.log('Succesfully created scorecard for ' + body.data.property.address);
-          let newsc = new Scorecard(
-            body.data._id, 
-            body.data.property,
-            body.data.wishlist,
-            body.data.owner,
-            body.data.scores,
-            body.data.featuredimage,
-            body.data.media,
-            body.data.active
-          );
+          let newsc = Scorecard.newInstance(body.data); 
+          // let newsc = new Scorecard(
+          //   body.data._id, 
+          //   body.data.property,
+          //   body.data.wishlist,
+          //   body.data.owner,
+          //   body.data.scores,
+          //   body.data.featuredimage,
+          //   body.data.media,
+          //   body.data.active
+          // );
           this.userState.addScorecardToUserScorecards(newsc);  
           body.scorecard = newsc; 
           // let data = { scorecard : newsc, signature : body.signature };
@@ -131,24 +132,25 @@ export class ScorecardStateService {
 
     return this.scorecardService.updateScorecard(scorecard)
       .map(res => res.json())
-      .map((res) => {
-        if (res.data._id) {
-          console.log('Succesfully updated scorecard for ' + res.data.property.address);
-          let newsc = new Scorecard(
-            res.data._id, 
-            res.data.property,
-            res.data.wishlist,
-            res.data.owner,
-            res.data.scores,
-            res.data.featuredimage,
-            res.data.media,
-            res.data.active
-          );
+      .map((body) => {
+        if (body.data._id) {
+          console.log('Succesfully updated scorecard for ' + body.data.property.address);
+          let newsc = Scorecard.newInstance(body.data); 
+          // let newsc = new Scorecard(
+          //   res.data._id, 
+          //   res.data.property,
+          //   res.data.wishlist,
+          //   res.data.owner,
+          //   res.data.scores,
+          //   res.data.featuredimage,
+          //   res.data.media,
+          //   res.data.active
+          // );
           this.updateSingleScorecardInUserScorecards(newsc);  
           return true;   
         }
         else{
-          console.log("Create did not succeed! Message: " + res.reason); 
+          console.log("Create did not succeed! Message: " + body.reason); 
           return false;
         }
       });
@@ -159,17 +161,18 @@ export class ScorecardStateService {
       .map(res => res.json())
       .map((res) => {
         if (res.data._id) {
-          let newMedia = new Media(
-            res.data._id, 
-            res.data.url,
-            res.data.caption,
-            res.data.owner,
-            res.data.type,
-            res.data.date,
-            res.data.orientation,
-            res.data.stereo,
-            res.data.tags
-          ); 
+          let newMedia = Media.newInstance(res.data);  
+          // let newMedia = new Media(
+          //   res.data._id, 
+          //   res.data.url,
+          //   res.data.caption,
+          //   res.data.owner,
+          //   res.data.type,
+          //   res.data.date,
+          //   res.data.orientation,
+          //   res.data.stereo,
+          //   res.data.tags
+          // ); 
           return newMedia;   
         }
         else{
@@ -219,20 +222,21 @@ export class ScorecardStateService {
   }
 
   newScorecardArray (scorecards : any []) : Observable<Scorecard[]> {
-    let newscorecards : Scorecard[] = []; 
-    scorecards.forEach(sc => {
-      let newsc = new Scorecard(
-        sc._id, 
-        sc.property,
-        sc.wishlist,
-        sc.owner,
-        sc.scores,
-        sc.featuredimage,
-        sc.media,
-        sc.active
-      );
-      newscorecards.push(newsc);    
-    })
+    let newscorecards : Scorecard[] = Scorecard.newArray(scorecards); 
+    // let newscorecards : Scorecard[] = []; 
+    // scorecards.forEach(sc => {
+    //   let newsc = new Scorecard(
+    //     sc._id, 
+    //     sc.property,
+    //     sc.wishlist,
+    //     sc.owner,
+    //     sc.scores,
+    //     sc.featuredimage,
+    //     sc.media,
+    //     sc.active
+    //   );
+    //   newscorecards.push(newsc);    
+    // })
     return Observable.of(newscorecards); 
   }
 

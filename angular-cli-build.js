@@ -17,7 +17,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       '@angular2-material/**/*.js',
-      'immutable/dist/immutable.js'
+      'immutable/dist/immutable.js',
+      'angular2-notifier/index.js'
     ],
     sassCompiler: {
       includePaths: [

@@ -8,11 +8,16 @@
 /** Map relative paths to URLs. */
 const map: any = {
   '@angular2-material': 'vendor/@angular2-material',
-  'immutable': 'vendor/immutable/dist/immutable.js'
+  'immutable': 'vendor/immutable/dist/immutable.js',
+  'angular2-notifier': 'node_modules/angular2-notifier'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'angular2-notifier': {
+      defaultExtension: 'js',
+      main: 'index.js'
+  },
   'immutable': {
     format: 'cjs'
   },
@@ -35,6 +40,11 @@ const packages: any = {
     format: 'cjs',
     defaultExtension: 'js',
     main: 'toolbar.js'
+  },
+  '@angular2-material/progress-bar': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'progress-bar.js'
   },
   '@angular2-material/card': {
     format: 'cjs',
