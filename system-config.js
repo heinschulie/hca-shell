@@ -118,6 +118,7 @@ var barrels = [
     'app/image-slide',
     'app/image-uploader',
     'app/autocomplete',
+    'app/dash-stats',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {

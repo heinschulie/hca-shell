@@ -9,7 +9,12 @@ md-toolbar {
   min-height: 10vh;
   height: 10vh;
   background-color: #FFECB3;
-  border-radius: 0 0 10px 10px; }
+  border-radius: 0 0 10px 10px;
+  -webkit-transition: 0.8s;
+  -moz-transition: 0.8s;
+  -ms-transition: 0.8s;
+  -o-transition: 0.8s;
+  transition: 0.8s; }
 
 md-toolbar-row {
   min-height: 10vh;
@@ -17,7 +22,12 @@ md-toolbar-row {
 
 .expandedtoolbar {
   min-height: 16vh;
-  border-radius: 0; }
+  border-radius: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s; }
 
 .toolbar-dress {
   position: absolute;
@@ -42,12 +52,22 @@ md-toolbar-row {
   align-items: center;
   justify-content: flex-start;
   position: absolute;
-  top: 10vh;
+  top: -10vh;
   height: 6vh;
   width: 100%;
   box-sizing: border-box;
   left: 0;
-  padding-left: 24px; }
+  padding-left: 24px;
+  -webkit-transition: 0.8s;
+  -moz-transition: 0.8s;
+  -ms-transition: 0.8s;
+  -o-transition: 0.8s;
+  transition: 0.8s; }
   .toolbar-title-container .toolbar-title {
     flex: 1;
     display: flex; }
+  .toolbar-title-container .toolbar-cancel {
+    margin-right: 4vw; }
+
+.exptoolbarvisible {
+  top: 10vh; }
