@@ -8,7 +8,7 @@
   </md-card-title>
   <div class="stepper-detail-container stepper-border" *ngIf="!scorecard?.property?._id">
     <form class="add-form" (ngSubmit)="addNewProperty()" #addForm="ngForm">
-      <md-input #address class="form-input" required [(ngModel)]="addressFragment" name="address" placeholder="What is the address" (keyup)=debouncedAutocompleteProperties()></md-input>
+      <md-input #address class="form-input" required [(ngModel)]="addressFragment" name="address" placeholder="What is the address?" (keyup)=debouncedAutocompleteProperties()></md-input>
       <md-list *ngIf="filteredList.length > 0">
         <md-list-item *ngFor="let property of filteredList" (click)="select(property)">
           <img md-list-avatar [src]="property.featuredimage?.url" alt="...">

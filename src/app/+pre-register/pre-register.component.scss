@@ -1,37 +1,130 @@
-@import '../styles/colors.scss'; 
+// @import '../styles/colors.scss'; 
+
+// .register-card{
+//   display: flex;
+//   flex-flow: column;
+//   align-items: center;
+//   justify-content: space-around;
+//   height: 90vh;
+//   background-color: $primary-color;
+
+// }
+
+// .register-card-content{
+//     flex: 1;
+//     display: flex;
+//     width: 100%;
+//     align-self: center;
+//     align-items: center;
+// }
+
+// .register-form{
+//   font-family: Roboto, "Helvetica Neue", sans-serif;
+//   display: flex;
+//   flex-flow: column;
+//   width: 85%;
+//   background: $white;
+//   border-radius: 0 10% 10% 0;
+//   align-items: flex-start;
+//   padding: 10% 0 10% 5%;
+// }
+
+// .next-button{
+//     margin-top: 3vh;
+//     align-self: flex-start;
+//     color: $white;
+//     background-color: $dark-primary-color;
+// }
+
+// .form-input .md-list-item{
+//   width: 80%; 
+//   height:40px;
+//   font-size: 12px;
+//   color: $accent-color;  
+// }
+
+// .br-slab {
+//     width: 40%;
+//     padding-right: 5%;
+//     padding-bottom: 5%;
+//     align-self: flex-end;
+// }
+
+// .login-link{
+//   font-family: Roboto, "Helvetica Neue", sans-serif;
+// }
+
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss';  
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0);
 
 .register-card{
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
+  // display: flex;
+  @include flexbox(); 
+  // flex-flow: column;
+  @include flex-flow(column nowrap);
+  // align-items: center;
+  @include align-items(center);
+  // justify-content: space-around;
+  @include justify-content(space-around);
+
   height: 90vh;
   background-color: $primary-color;
+  padding-left: 0; 
 
 }
 
 .register-card-content{
-    flex: 1;
-    display: flex;
+    // display: flex;
+    @include flexbox(); 
+    // flex: 1;
+    @include flex(1); 
+    // align-self: center;
+    @include align-self(center);
+    // align-items: center;
+    @include align-items(center);
     width: 100%;
-    align-self: center;
-    align-items: center;
 }
 
 .register-form{
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  display: flex;
-  flex-flow: column;
+  // display: flex;
+   @include flexbox(); 
+  // flex-flow: column;
+  @include flex-flow(column nowrap);
+  // align-items: flex-start;
+  @include align-items(flex-start);
   width: 85%;
   background: $white;
-  border-radius: 0 10% 10% 0;
-  align-items: flex-start;
+  // border-radius: 0 10% 10% 0;
+  @include border-radius(0 10% 10% 0);
   padding: 10% 0 10% 5%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .next-button{
+    // align-self: flex-start;
+    @include align-self(flex-start);
     margin-top: 3vh;
-    align-self: flex-start;
     color: $white;
     background-color: $dark-primary-color;
 }
@@ -44,10 +137,11 @@
 }
 
 .br-slab {
+    // align-self: flex-end;
+    @include align-self(flex-end);
     width: 40%;
     padding-right: 5%;
     padding-bottom: 5%;
-    align-self: flex-end;
 }
 
 .login-link{

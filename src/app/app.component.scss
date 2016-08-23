@@ -1,6 +1,6 @@
 @import './styles/breakpoints.scss'; 
 @import './styles/colors.scss'; 
-@import './styles/mixins.scss'; 
+@import './styles/_etcmixins.scss'; 
 
 //Variables 
 $toolbar-height: 10vh; 
@@ -25,6 +25,7 @@ md-toolbar{
     height: $toolbar-height;
     background-color: $light-primary-color; 
     border-radius: 0 0 10px 10px;
+    @include transition(.8s); 
 }
 md-toolbar-row{
     min-height: $toolbar-height;
@@ -35,6 +36,7 @@ md-toolbar-row{
     //min-height: 100px;
     min-height: 16vh;
     border-radius: 0;
+    @include transition(.3s); 
 }
 
 .toolbar-dress{ //Black border-radiused element 
@@ -62,20 +64,23 @@ md-toolbar-row{
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    top: $toolbar-height;
+    top: -$toolbar-height;
     height: 6vh; 
     width: 100%;
     box-sizing: border-box;
     left: 0;
     padding-left: 24px;
-
+    @include transition(.8s); 
     .toolbar-title{
         flex: 1;
         display: flex;
     }
     .toolbar-cancel{
-        //align-self: flex-end; 
+        margin-right: 4vw;
     }
+}
+.exptoolbarvisible{
+    top: $toolbar-height;
 }
 
 

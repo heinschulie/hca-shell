@@ -1,6 +1,36 @@
-@import '../styles/colors.scss'; 
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+//  display: flex;
+@include flexbox(); 
+// flex: 1;
+@include flex(1 0 auto); 
+//  flex-flow: column;
+@include flex-flow(column nowrap);
+//  align-items: center;
+// flex-grow: 1;
+@include flex-grow(1);
+@include align-items(center); 
+//  justify-content: space-between;
+@include justify-content(space-between); 
+// align-self: center;    
+@include align-self(center);
+// align-self: center;
+@include align-items(center);
+@include font-size(16);
+@include box-sizing(border-box);
+@include border-radius(0 10% 10% 0); 
 
 .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile-style{
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
@@ -14,11 +44,13 @@ md-card{
 }
 
 .image-uploader-container{
-	display: flex; 
+	// display: flex; 
+	@include flexbox();
 }
 
 .image-uploader-button{
-	font-size: 12px;
+	// font-size: 12px;
+	@include font-size(12);
 }
 
 .arr-camera{

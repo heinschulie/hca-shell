@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Slide } from '../image-slide';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from '../shared';
+import { Scorecard } from '../shared'; 
+import { ScorecardStateService } from '../shared'; 
+import { TitleStateService } from '../shared'; 
+import { MediaStateService } from '../shared'; 
+import { Media } from '../shared'; 
+
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
+import { MD_ICON_DIRECTIVES } from '@angular2-material/icon';
+
 import { ImageCarouselComponent } from '../image-carousel';
 
 @Component({
@@ -8,37 +19,43 @@ import { ImageCarouselComponent } from '../image-carousel';
   templateUrl: 'image-viewer.component.html',
   styleUrls: ['image-viewer.component.css'],
   directives: [
-    Slide,
+    MD_CARD_DIRECTIVES, 
+    MD_ICON_DIRECTIVES,
+    MD_GRID_LIST_DIRECTIVES,
     ImageCarouselComponent
   ]
 })
 export class ImageViewerComponent implements OnInit {
-    //The time to show the next photo
-    private NextPhotoInterval:number = 2000;
-    //Looping or not
-    private noLoopSlides:boolean = true;
-    //Photos
-    private slides:Array<any> = [];
+    private sub: any;
+    errorMessage: any; 
+    scorecard: Scorecard; 
 
-    constructor() {
-            this.addNewSlide();
-    }
+    constructor(private commonService: CommonService,
+                private route: ActivatedRoute,
+                private router: Router,
+                private _scorecardState: ScorecardStateService,
+                private titleState: TitleStateService,
+                private mediaState: MediaStateService) { 
+                    if(typeof this.scorecard === "undefined")
+                        this.scorecard = Scorecard.returnNewEmptyInstance(); 
+                }
 
     ngOnInit() {
-    }
+        this.sub = this.route.params.subscribe(params => {
+        let id = params['id']; // (+) converts string 'id' to a number
+        this._scorecardState.getScorecardById(id).subscribe( //Get system level anatomies 
+                    scorecard => { 
+                if(scorecard.featuredimage.economic_url)
+                    this.scorecard = scorecard;
+                else{
+                    this.scorecard = Scorecard.newInstance(scorecard); 
+                }
+            },error => this.errorMessage = <any>error);
+        });
+        this.titleState.setTitle("Images");
+  }
 
-    private addNewSlide() {
-         this.slides.push(
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car1.jpg',text:'BMW 1'},
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car2.jpg',text:'BMW 2'},
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car3.jpg',text:'BMW 3'},
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car4.jpg',text:'BMW 4'},
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car5.jpg',text:'BMW 5'},
-            {image:'http://www.angulartypescript.com/wp-content/uploads/2016/03/car6.jpg',text:'BMW 6'}
-        );
-    }
-
-    private removeLastSlide() {
-        this.slides.pop();
+    selectMedia(media : Media){
+        this.mediaState.setCurrentMedia(media); 
     }
 }

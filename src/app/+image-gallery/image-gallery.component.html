@@ -1,17 +1,14 @@
 <md-card class="container-card">
-  <md-list>
-    <md-list-item> <!--*ngFor="let property of properties"-->
-      <h5 md-line>Some property address in a suburb</h5>
-      <div md-line class="image-strip">
-        <md-grid-list cols="6">
-          <md-grid-tile [style.background]="'lightblue'">One</md-grid-tile>
-          <md-grid-tile [style.background]="'lightblue'">Two</md-grid-tile>
-          <md-grid-tile [style.background]="'lightblue'">Three</md-grid-tile>
-          <md-grid-tile [style.background]="'lightblue'">Four</md-grid-tile>
-          <md-grid-tile [style.background]="'lightblue'">Five</md-grid-tile>
-          <md-grid-tile [style.background]="'lightblue'">Six</md-grid-tile>
-        </md-grid-list>
+    <a *ngFor="let scorecard of scorecards" [routerLink]="['/images/' + scorecard._id ]"> 
+      <div class="gallery-line-item">
+          <h6 md-line>{{scorecard.property.address}}</h6>
+          <div md-line class="image-strip">
+            <md-grid-list cols="6">
+              <md-grid-tile *ngFor="let media of scorecard?.media">
+                <img class="grid-list-image" [src]="media.grid_url" />
+              </md-grid-tile>
+            </md-grid-list>
+          </div>
       </div>
-    </md-list-item>
-  </md-list>
+    </a>
 </md-card>

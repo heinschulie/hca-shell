@@ -1,9 +1,10 @@
-import { Component, ApplicationRef } from '@angular/core';
+import { Component, ApplicationRef, OnInit } from '@angular/core';
 import { ActivatedRoute, ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
 
 import { CommonService } from './shared'; 
 import { PropertyService } from './shared'; 
 import { WishlistService } from './shared'; 
+import { TitleStateService } from './shared'; 
 import { ScorecardService } from './shared'; 
 // import { UserService } from './shared'; 
 
@@ -43,18 +44,23 @@ import { AuthGuard }     from './shared';
     //UserService, 
     PropertyStateService, 
     PropertyService, 
+    TitleStateService, 
     WishlistService, 
     ScorecardService, 
     ScorecardStateService,
     WishlistStateService
   ]
 })
-export class AppComponent {
-  title = '...';
+export class AppComponent implements OnInit {
+  title : string;
   errorMessage: any; 
 
     // This constructor code is a temporary fix for this issue: https://github.com/angular/angular/issues/9565
-    constructor(public commonService: CommonService, public userState: UserStateService, private _router: Router, _applicationRef: ApplicationRef) {
+    constructor(public commonService: CommonService, 
+                public userState: UserStateService, 
+                private titleState: TitleStateService, 
+                private _router: Router, 
+                private _applicationRef: ApplicationRef) {
         if(this.isMac()) {
             _router.events.subscribe(ev => {
                 if(ev instanceof NavigationEnd) {
@@ -64,9 +70,17 @@ export class AppComponent {
                 }
             })
         }
-        this.commonService.title$.subscribe(
+        
+    }
+
+    ngOnInit() {
+        this.titleState.title$.subscribe(
 			data => { this.title = data; },
 			error => this.errorMessage = <any>error);
+    }
+
+    goBack() {
+        window.history.back();
     }
 
     isMac() {

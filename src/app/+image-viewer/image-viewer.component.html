@@ -1,1 +1,6 @@
- <app-image-carousel></app-image-carousel>
+<app-image-carousel [images]="scorecard?.media"></app-image-carousel>
+<md-grid-list cols="3">
+  <md-grid-tile *ngFor="let media of scorecard?.media" (click)="selectMedia(media)">
+    <img class="grid-list-image" [src]="media.grid_url" />
+  </md-grid-tile>
+</md-grid-list>

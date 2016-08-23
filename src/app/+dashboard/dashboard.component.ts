@@ -4,8 +4,10 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { CommonService } from '../shared';
 import { Scorecard } from '../shared'; 
 import { ScorecardStateService } from '../shared'; 
+import { TitleStateService } from '../shared'; 
 import { ListCardComponent } from '../list-card'; 
 import { DetailCardComponent } from '../detail-card'; 
+import { DashStatsComponent } from '../dash-stats'; 
 
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
@@ -28,37 +30,47 @@ import { Truncate } from '../shared';
     MD_TOOLBAR_DIRECTIVES,
     DetailCardComponent,
     ListCardComponent,
-    ROUTER_DIRECTIVES],
+    ROUTER_DIRECTIVES,
+    DashStatsComponent],
   pipes: [ Truncate ]
 })
 export class DashboardComponent implements OnInit {
 
   constructor(private _router: Router, 
               public commonService: CommonService,
+              private titleState: TitleStateService,
               private _scorecardState : ScorecardStateService) {}
 
-  title: string = '';
   errorMessage: string;
   scorecards: Scorecard[];
   scorecard: Scorecard;
   private securitySubscription:any;
+  contentclass : string = "content"; 
   // private authenticated:boolean = false;
 
   ngOnInit() { 
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
+			if(/Safari/.test(navigator.userAgent)){
+				if(navigator['standalone'] === false){
+					this.contentclass = "iosbrowser";
+				}
+			}
+		}
+    
     this._scorecardState.scorecard$.subscribe(
 			data => { this.scorecards = data.toArray(); },
 			error => this.errorMessage = <any>error); // subscribe to scorecards
 
       //This is all removable if dahsboard has no title anyway. Which it doesn't. 
-    this.commonService.title$.subscribe(
-			data => { this.title = data; },
-			error => this.errorMessage = <any>error);
+    // this.commonService.title$.subscribe(
+		// 	data => { this.title = data; },
+		// 	error => this.errorMessage = <any>error);
     // this.securitySubscription = this.commonService.subscription.subscribe(authenticated=>{
     //     this.authenticated=authenticated;
     //     console.log("In dashboard " + this.authenticated); 
     //   });
 
-    this.commonService.setTitle("Dashboard");
+    this.titleState.setTitle("");
   }
 
   onSelect(scorecard : Scorecard) { 
@@ -86,26 +98,26 @@ export class DashboardComponent implements OnInit {
     this._router.navigate(['/review', this.scorecard._id]);
   }
 
-  // DASHBOARD PANEL FOR 1st TIME USERS
+  // // DASHBOARD PANEL FOR 1st TIME USERS
 
-  haswl = false; 
-  toggleWl() {
-    this.haswl = !this.haswl; 
-  }
-  userHasWishlist() : boolean {
-    return this.haswl; // TODO 
-  }
-  haspop = false; 
-  togglePop() {
-    this.haspop = !this.haspop; 
-  }
-  userHasProperty() : boolean {
-    return this.haspop; // TODO 
-  }
+  // haswl = false; 
+  // toggleWl() {
+  //   this.haswl = !this.haswl; 
+  // }
+  // userHasWishlist() : boolean {
+  //   return this.haswl; // TODO 
+  // }
+  // haspop = false; 
+  // togglePop() {
+  //   this.haspop = !this.haspop; 
+  // }
+  // userHasProperty() : boolean {
+  //   return this.haspop; // TODO 
+  // }
 
-  goToWishlist() : void {
-    this._router.navigate(['/wishlist']); 
-  }
+  // goToWishlist() : void {
+  //   this._router.navigate(['/wishlist']); 
+  // }
 
-  // END 
+  // // END 
 }

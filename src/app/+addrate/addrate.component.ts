@@ -18,6 +18,7 @@ import { Scorecard } from '../shared';
 import { Media } from '../shared'; 
 import { PropertyStateService } from '../shared'; 
 import { ScorecardStateService } from '../shared'; 
+import { TitleStateService } from '../shared'; 
 import { MediaStateService } from '../shared'; 
 
 import { HcaListitemComponent } from '../hca-listitem'; 
@@ -62,6 +63,7 @@ export class AddrateComponent implements OnInit {
               private commonService: CommonService,
               private propertyState: PropertyStateService, 
               private scorecardState: ScorecardStateService,
+              private titleState: TitleStateService,
               private mediaState: MediaStateService) {
                 this.propertyState.property$.subscribe(
                   data => { 
@@ -94,11 +96,13 @@ export class AddrateComponent implements OnInit {
             .subscribe(scorecard => {
               this.scorecard = scorecard;
               this.scorecardImageUrl = scorecard.featuredimage.url;
+              this.titleState.setTitle("Rate");
             }); 
         else{    
           this.scorecard = Scorecard.returnNewEmptyInstance();
           this.scorecard.wishlist = this.wishlist; 
-          this.scorecard.owner = this.wishlist.owner;   
+          this.scorecard.owner = this.wishlist.owner;  
+          this.titleState.setTitle("Find a Property"); 
         }
       });
   }
@@ -262,6 +266,7 @@ export class AddrateComponent implements OnInit {
                 this.scorecardImageUrl = this.scorecard.featuredimage.url;
                 this.inProgress = false;  
                 console.log("Succesfully updated new scorecard with new image."); 
+                this.titleState.setTitle("Rate");
               }) 
             }      
           })

@@ -1,60 +1,105 @@
 @import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1 0 auto); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0);
 
 .wishlist-item{
-    display: flex;
-    align-items: flex-start;  
-    flex: 1 100% !important; 
+    // display: flex;
+    @include flexbox(); 
+    // align-items: flex-start;
+    @include align-items(flex-start);   
+    // flex: 1 100% !important; 
+    @include flex(1 100%);
     margin-bottom: 4vh;
 
     .score{
-        display: flex;
-        flex: 3 auto;
-        align-items: center;
+        // display: flex;
+        @include flexbox(); 
+        // flex: 3 auto;
+        @include flex(3 auto);
+        // align-items: center;
+        @include align-items(center);
         height: 30px;
         border-bottom: 2px dotted gray;
     }
     .priority{
-        display: flex;
-        justify-content: center;
-        flex: 2;
+        // display: flex;
+        @include flexbox();
+        // justify-content: center;
+        @include justify-content(center); 
+        // flex: 2;
+        @include flex(2);
     }
 }
 
-
 .priority-weight{
+    // display: flex;
+    @include flexbox();
+    // justify-content: center;
+    @include justify-content(center);
+    // align-items: center; 
+    @include align-items(center);
+
     width: 30px;
     height: 30px;
     background-color: $divider-color;
-    border-radius: 50%;
+    // border-radius: 50%;
+    @include border-radius(50%);
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
     color: $white; 
 }
 .item-description{
-    flex: 3 auto;
+    // flex: 3 auto;
+    @include flex(3 auto);
     font-weight: bolder;
-    font-size: 14px;
+    // font-size: 14px;
+    @include font-size(14);
 }
 .item-score{
+    // display: flex;
+    @include flexbox();
+    // flex: 1 auto;
+    @include flex(1 auto);
+    // justify-content: center;
+    @include justify-content(center);
+
     font-weight: bold;
-    display: flex;
-    flex: 1 auto;
-    justify-content: center;
-    font-size: 22px;
+    // font-size: 22px;
+    @include font-size(22);
     color: $primary-color; 
 }
 .expander {
-  // This fills the remaining space, by using flexbox.  
-  // Every toolbar row uses a flexbox row layout. 
-  flex: 1 1 auto;
+    // This fills the remaining space, by using flexbox.  
+    // Every toolbar row uses a flexbox row layout. 
+    // flex: 1 1 auto;
+    @include flex(1 1 auto);
 }
 
 .scorecard-total{
     position: absolute;
     top: 10%; 
-    font-size: 32px;
+    // font-size: 32px;
+    @include font-size(32);
 }
 .scorecard-headline{
     display: block;
@@ -65,12 +110,14 @@
 .scorecard-headline-detail{
     display: block;
     width: 100%;
-    font-size: 24px;
+    // font-size: 24px;
+    @include font-size(24);
 }
 .scorecard-headline-descriptor{
     display: block;
     width:100%;
-    font-size: 16px;
+    // font-size: 16px;
+    @include font-size(16);
 }
 
 md-grid-tile{

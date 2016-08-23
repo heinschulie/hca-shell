@@ -1,4 +1,26 @@
-@import '../styles/colors.scss'; 
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1 0 auto); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0); 
 
 .carousel{
     position: relative; 
@@ -6,9 +28,13 @@
     width:100%;
 }
 .slides{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    @include flexbox(); 
+    // justify-content: center;
+    @include justify-content(center); 
+    // align-items: center;
+    @include align-items(center);
+
     position:relative;
     overflow: hidden; 
     padding: 0;
@@ -16,13 +42,15 @@
     margin-bottom: 2px;
     list-style:none;
     background-color: $black; 
-    transition: 0.3s; 
+    // transition: 0.3s;
+    @include transition(0.3s);  
 }
 .slides > li{
-    box-sizing: border-box;
+    // box-sizing: border-box;
+    @include box-sizing(border-box);
+
     position:relative;
     float:left;
-    //width: 20%; /* 100 / number of panes */
 }
 .carousel img{
     display:block;
@@ -30,37 +58,43 @@
     max-width:100%;
 }
 .carousel h2{
-    margin-bottom: 0;
-    font-size:1em;
-    padding:1.5em 0.5em 1.5em 0.5em;
     position:absolute;
     right:0px;
     bottom:0px;
     left:0px;
+    margin-bottom: 0;
+    font-size:1em;
+    padding:1.5em 0.5em 1.5em 0.5em;
     text-align:center;
-    color:#fff;
+    color:$white;
     background-color:rgba(0,0,0,0.75);
     text-transform: uppercase;
 }
 
 .carousel-pointer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    @include flexbox(); 
+    // justify-content: center;
+    @include justify-content(center); 
+    // align-items: center;
+    @include align-items(center);
+
     position: absolute;
     top: 50%;
     height: 10%;
     width: 12.5%;
     background: rgba(0,0,0,0.5);
     transform: translate(0,-50%); 
-    color: white;
+    color: $white;
 }
 
 .pointer-left{
     left: 0; 
-    border-radius: 0 10px 10px 0;
+    // border-radius: 0 10px 10px 0;
+    @include border-radius(0 10px 10px 0); 
 }
 .pointer-right{
     right: 0; 
-    border-radius: 10px 0 0 10px;
+    // border-radius: 10px 0 0 10px;
+    @include border-radius(10px 0 0 10px); 
 }

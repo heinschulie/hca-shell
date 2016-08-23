@@ -16,23 +16,24 @@ export class CommonService {
 
   private _title$: BehaviorSubject<string> = new BehaviorSubject('');
   public title$ : Observable<string> = this._title$.asObservable();
+  
   // public titleSet() { return !!this._title$.getValue() };
   
-  public authenticated:boolean = false;
-  subscription:EventEmitter<any> = new EventEmitter();
+  // public authenticated:boolean = false;
+  // subscription:EventEmitter<any> = new EventEmitter();
   
-  toggleAuthentication(){
-    this.authenticated = !this.authenticated;
-    this.subscription.next(this.authenticated);
-  }
+  // toggleAuthentication(){
+  //   this.authenticated = !this.authenticated;
+  //   this.subscription.next(this.authenticated);
+  // }
 
   setTitle(newtitle : string){
-    console.log("1 " + this.authenticated);
-    this.authenticated = !!newtitle;
+    // console.log("1 " + this.authenticated);
+    // this.authenticated = !!newtitle;
     //this._title$ = new BehaviorSubject(newtitle);   
     this._title$.next(newtitle);
-    this.subscription.next(this.authenticated);
-    console.log("2 " + this.authenticated);
+    // this.subscription.next(this.authenticated);
+    // console.log("2 " + this.authenticated);
   }
 
   constructor() {}

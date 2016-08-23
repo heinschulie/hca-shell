@@ -65,4 +65,11 @@ export class Scorecard {
         })
         return newarray; 
     }
+
+    private calculateTotal (scorecard : Scorecard) : void {
+        let total = 0; 
+        scorecard.scores.forEach(score => total = total + score.score);
+        total = (total / scorecard.scores.length );
+        scorecard.total = total.toFixed(1);   
+    }
 }

@@ -1,9 +1,15 @@
 @import '../styles/colors.scss'; 
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
 
 md-card.stepper-card{
+    //  display: flex;
+    @include flexbox(); 
+    // box-sizing: border-box;
+    @include box-sizing(border-box);
+    width: 100%;
     min-height: 100vh;
     padding-bottom: 15vh;
-    display: flex; 
 }
 .clearfix{
     &:before, &:after {
@@ -14,27 +20,23 @@ md-card.stepper-card{
 }
 
 .stepper-title{
+    //  display: flex;
+    @include flexbox(); 
+    //  justify-content: space-between;
+    @include justify-content(space-between);
+    // align-items: flex-start;
+    @include align-items(flex-start); 
     margin-top: 10px;
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    // font-size: 18px;
+    @include font-size(18);
     .title{
+        // flex: 1;
+        @include flex(1 0 auto); 
         text-transform: uppercase; 
-        flex: 1; 
         padding-left: 2vw; 
     }
 }
-// .stepper-title.rate-title{
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: flex-start;
 
-//     .title{
-//         flex: 1; 
-//         padding-left: 2vw; 
-//     }
-// }
 .arr-camera{
     background: $green; 
     color: $white; 
@@ -60,6 +62,7 @@ md-card.stepper-card{
     margin-left: 5.5vw;
     margin-right: 5vw;
     padding-left: 10%;
+    width: 70vw;
 }
 .stepper-detail-container.rate-container{
     margin-left: 0;
@@ -71,47 +74,66 @@ md-card.stepper-card{
 }
 
 .stepper-photo-button-container{
-    display: flex;
-    justify-content: flex-end;
+    //  display: flex;
+    @include flexbox(); 
+    //  justify-content: flex-end;
+    @include justify-content(flex-end);
 }
 
 // ADD SECTION 
 .add-form{
-    display: flex;
-    flex-flow: column;
+    //  display: flex;
+    @include flexbox(); 
+    //  flex-flow: column;
+    @include flex-flow(column nowrap);
 
     md-input{
-        flex: 1; 
+        // flex: 1;
+        @include flex(1 0 auto); 
     }
 }
 .add-button{
-    align-self: flex-end; 
+    // align-self: flex-end;    
+    @include align-self(flex-end);
 }
 
 .property-container{
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    font-size: 12px;
+    //  display: flex;
+    @include flexbox(); 
+    //  flex-flow: row nowrap;
+    @include flex-flow(row nowrap);
+    //  align-items: flex-start;
+    @include align-items(flex-start); 
+    // font-size: 12px;
+    @include font-size(12);
     font-weight: 500;
     
     .property-details{
-        flex-flow: row wrap;
-        flex-grow: 1;
-        justify-content: space-between;
-        align-items: flex-start;
+        //  flex-flow: row nowrap;
+        @include flex-flow(row nowrap);
+        // flex-grow: 1;
+        @include flex-grow(1);
+        //  justify-content: space-between;
+        @include justify-content(space-between);
+        //  align-items: flex-start;
+        @include align-items(flex-start); 
     }
     .property-address{
-        display: flex;
+        //  display: flex;
+        @include flexbox(); 
         margin-bottom: 1vh;
     }
     .property-price{
-        display: flex;
+        //  display: flex;
+        @include flexbox(); 
     }
     .property-breakdown{
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
+        // flex: 1;
+        @include flex(1 0 auto); 
+        //  display: flex;
+        @include flexbox(); 
+        //  justify-content: flex-end;
+        @include justify-content(flex-end);
     }
 
     .property-breakdown-detail {
@@ -122,4 +144,8 @@ md-card.stepper-card{
 // IMAGE SECTION
 
 // REVIEW SECTION
+
+.rate-container{
+    width: 87vw; 
+}
 

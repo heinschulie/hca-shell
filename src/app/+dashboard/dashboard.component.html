@@ -1,9 +1,10 @@
 <div class="body" [ngClass]="{ 'accommodate-exp-toolbar': !!title }">
 	<div class="main">
-		<div class="content">   
+		<!--<div class="content">   -->
+    <div class="content" [className]="contentclass"> 
 			<div class="box">
         <!--Panel that appears atop Dashboard-->
-        <div class="dashboard-synopsis">
+        <!--<div class="dashboard-synopsis">
           <h4>Your Dashboard</h4>
           <h5>Recent Activity</h5>
           <div class="stats-container">
@@ -26,7 +27,6 @@
               <p>Top Score</p>
               <span>3</span>
             </div>
-            <!--POTENTIAL CANDIDATE FOR COMPONENT-->
             <div class="top-property-details" >
                 <div class="top-property-address">
                   14 Norwood Road, Sea Point  
@@ -39,7 +39,6 @@
                   </div> 
                 </div>
             </div>
-            <!--END-->
           </div>
           <div class="new-user-guide"  *ngIf="!userHasWishlist() || !userHasProperty()">
             <p>Lorem ipsum dolor sit amet, consectetuer, sed diam. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p>
@@ -61,9 +60,10 @@
             </div>
           </div>
           <md-divider></md-divider>
-        </div>
+        </div>-->
         <!--END : Panel that appears atop Dashboard-->
-        <div [ngClass]="{ passive:!scorecard.active }" *ngFor="let scorecard of scorecards" (click)="onSelect(scorecard)"> 
+        <app-dash-stats></app-dash-stats>
+        <div class="dash-card-container" [ngClass]="{ passive:!scorecard.active }" *ngFor="let scorecard of scorecards" (click)="onSelect(scorecard)"> 
           <app-list-card *ngIf="!scorecard.active" [scorecard]="scorecard"></app-list-card> 
           <app-detail-card *ngIf="scorecard.active" [scorecard]="scorecard"></app-detail-card>
         </div>

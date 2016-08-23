@@ -1,4 +1,26 @@
-@import '../styles/colors.scss'; 
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1 0 auto); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0); 
 
 .clearfix{
     &:before, &:after {
@@ -31,10 +53,12 @@
 }
 
 .list-title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // padding-top: 2vh;
+    // display: flex;
+    @include flexbox(); 
+    // justify-content: space-between;
+    @include justify-content(space-between);
+    // align-items: center;
+    @include align-items(center);
 }
 
 .list-title-inactive{
@@ -43,8 +67,10 @@
 }
 
 .list-detail-container{
-    display: flex;
-    flex-flow: column;
+    // display: flex;
+    @include flexbox(); 
+    // flex-flow: column;
+    @include flex-flow(column nowrap);
 
     .list-detail-subtitle{
         margin-left: 11vw;
@@ -52,7 +78,8 @@
 }
 
 .list-button{
-    align-self: flex-end;
+    // align-self: flex-end;
+    @include align-self(flex-end);
     margin-top: 5vh;
 }
 
@@ -61,13 +88,18 @@
 }
 
 .list-title span.list-title-primary {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: gray;
+    // display: flex;
+    @include flexbox();
+    // justify-content: center;
+    @include justify-content(center);
+    // align-items: center;
+    @include align-items(center);
+
+    background-color: $lightgray;
     width: 8vw;
     height: 8vw;
-    border-radius: 50%;
+    // border-radius: 50%;
+    @include border-radius(50%); 
     text-align: center;
     color: $white;
 }
@@ -77,30 +109,41 @@
 }
 
 .list-title span.list-title-secondary{
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    @include flexbox();
+    // flex: 1;
+    @include flex(1);  
+    // justify-content: space-between;
+    @include justify-content(space-between);
+    // align-items: center;
+    @include align-items(center);
+
     margin-left: 11vw;
 }
 .list-title span.list-title-secondary-inactive{
-    border-bottom: 2px dotted gray;
+    border-bottom: 2px dotted $darkgray;
     margin-left: 3vw;
 }
 
 .list-title p{
-    display: flex; 
+    // display: flex;
+    @include flexbox(); 
 }
 
 .list-title-icon{
-    display: flex;
-    align-items: center;
-    font-size: 18px;
+    // display: flex;
+    @include flexbox();
+    // align-items: center;
+    @include align-items(center);
+    // font-size: 18px;
+    @include font-size(18);
 }
 .list-title-icon.button{
-    justify-content: center;
+    // justify-content: center;
+    @include justify-content(center);
     color: $accent-color; 
-    font-size: 12px;
+    // font-size: 12px;
+    @include font-size(12);
     padding: 0;
 }
 .list-title-icon.score{

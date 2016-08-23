@@ -11,6 +11,7 @@ import { CommonService } from './app/shared';
 // import { ToastrService } from './app/shared'; 
 import { MediaService } from './app/shared'; 
 import { MediaStateService } from './app/shared'; 
+import { TitleStateService } from './app/shared/'; 
 import { UserService } from './app/shared'; 
 import { UserStateService } from './app/shared/'; 
 
@@ -70,6 +71,7 @@ bootstrap(AppComponent, [
     CommonService, 
     MediaService,
     MediaStateService,
+    TitleStateService,
     UserService,
     UserStateService, 
     HTTP_PROVIDERS,

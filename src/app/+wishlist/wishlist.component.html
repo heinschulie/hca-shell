@@ -1,6 +1,6 @@
 
 
-<md-card class="wishlist-card-container">
+<md-card class="wishlistf-card-container wishlist-card-height">
   <md-card-content>
     <strong>Let’s prioritise.</strong> List up to 10 things (min 4) you would like to see in your new home. Below are some hints, click to personalise.
   </md-card-content>
@@ -13,7 +13,7 @@
                     (updateItemEvent) = "onUpdateItem($event)"></app-hca-listitem>
   
   <button md-button *ngIf="!showAddPriorityDialog" (click)="showAddPriorityDialog = !showAddPriorityDialog">Add Priority</button>
-  <div *ngIf="showAddPriorityDialog">
+  <div class="addPriorityContainesr" *ngIf="showAddPriorityDialog">
     <md-input required [(ngModel)]="prioritydescription" name="prioritydescription" placeholder="Name your priority..."></md-input>
     <button md-button *ngIf="showAddPriorityDialog" [disabled]="!prioritydescription" (click)="addPriority()">Save Priority</button>
   </div>

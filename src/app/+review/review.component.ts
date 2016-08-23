@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from '../shared';
 import { Scorecard } from '../shared'; 
 import { ScorecardStateService } from '../shared'; 
+import { TitleStateService } from '../shared'; 
 import { MediaStateService } from '../shared'; 
 import { Media } from '../shared'; 
 import { DetailCardComponent } from '../detail-card'; 
@@ -43,6 +44,7 @@ export class ReviewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private _scorecardState: ScorecardStateService,
+              private titleState: TitleStateService,
               private mediaState: MediaStateService) { 
                 if(typeof this.scorecard === "undefined")
                   this.scorecard = Scorecard.returnNewEmptyInstance(); 
@@ -53,11 +55,15 @@ export class ReviewComponent implements OnInit {
       let id = params['id']; // (+) converts string 'id' to a number
       this._scorecardState.getScorecardById(id).subscribe( //Get system level anatomies 
 				scorecard => { 
-          this.scorecard = scorecard;
+          if(scorecard.featuredimage.economic_url)
+            this.scorecard = scorecard;
+          else{
+            this.scorecard = Scorecard.newInstance(scorecard); 
+          }
         },
 				error => this.errorMessage = <any>error);
     });
-    this.commonService.setTitle("Review");
+    this.titleState.setTitle("Review");
   }
 
   selectMedia(media : Media){

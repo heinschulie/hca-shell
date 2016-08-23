@@ -1,28 +1,63 @@
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1 0 auto); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0);
 
 .user-card{
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-  //height: 80vh;
+  // display: flex;
+  @include flexbox();
+  // flex-flow: column;
+  @include flex-flow(column nowrap);
+  // align-items: center;
+  @include align-items(center);
+  // justify-content: space-around;
+  @include justify-content(space-around);
 }
 
 .user-card-content{
-    flex: 1;
-    display: flex;
+    // display: flex;
+    @include flexbox();
+    // flex: 1;
+    @include flex(1); 
+    // align-self: center;
+    @include align-self(center);
+    // align-items: center;
+    @include align-items(center);
+
     margin: 10%; 
     width: 80%;
-    align-self: center;
-    align-items: center;
 }
 
 .user-form{
-  display: flex;
-  flex-flow: column;
+  // display: flex;
+  @include flexbox();
+  // flex-flow: column;
+  @include flex-flow(column nowrap);
   width: 100%;
 }
 
 .user-button{
+    // align-self: flex-end;
+    @include align-self(flex-end);
     margin-top: 5vh;
-    align-self: flex-end;
 }

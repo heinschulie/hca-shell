@@ -18,5 +18,6 @@ export * from './services/wishlist.service';
 export * from './state/media-state.service';
 export * from './state/property-state.service';
 export * from './state/scorecard-state.service';
+export * from './state/title-state.service';
 export * from './state/user-state.service';
 export * from './state/wishlist-state.service';

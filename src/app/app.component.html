@@ -1,28 +1,3 @@
-<!--<md-sidenav-layout fullscreen>
-  <md-sidenav #sidenav class="sidenav">
-    <md-nav-list>
-      <a md-list-item [routerLink]="['']">
-          <span md-line>Dashboard</span>
-      </a> 
-      <a md-list-item [routerLink]="['/wishlist']">
-          <span md-line>Wishlist</span>
-      </a> 
-      <a md-list-item [routerLink]="['/images']">
-          <span md-line>Image Gallery</span>
-      </a> 
-      <a md-list-item [routerLink]="['/images/1']">
-          <span md-line>Image Viewer</span>
-      </a> 
-    </md-nav-list>
-  </md-sidenav>
-  <md-toolbar color="primary">
-    <button md-icon-button (click)="sidenav.open()">
-      <md-icon>menu</md-icon>
-    </button>
-  </md-toolbar>
-  <router-outlet></router-outlet>
-</md-sidenav-layout>-->
-
 <md-sidenav-layout fullscreen>
   <md-sidenav #sidenav class="sidenav">
     <md-nav-list>
@@ -50,10 +25,10 @@
     <button class="md-toolbar-menu" md-icon-button (click)="sidenav.open()">
       <md-icon >menu</md-icon>
     </button>
-    <div class="toolbar-title-container"> <!--*ngIf="authenticated" -->
+    <div class="toolbar-title-container" [ngClass]="{ exptoolbarvisible: !!title }"> <!--*ngIf="authenticated" -->
       <div class="toolbar-title">{{title}}</div>
-      <button class="toolbar-cancel" md-icon-button (click)="commonService.setTitle('')"> <!---->
-        <md-icon >cancel</md-icon>
+      <button class="toolbar-cancel" md-icon-button (click)="goBack()"> <!---->
+        <md-icon>subdirectory_arrow_left</md-icon>
       </button>
     </div>
     <div class="toolbar-dress"></div>

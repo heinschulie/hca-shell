@@ -1,0 +1,165 @@
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+// START : Panel that appears atop Dashboard
+.dashboard-synopsis{
+    //  display: flex;
+    @include flexbox(); 
+    //  flex-flow: column;
+    @include flex-flow(column nowrap);
+    width: 96vw; // ***************************************** SUSPECT
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin-bottom: 1vh;
+    h4,h5{
+        margin-top: 1vh; 
+        margin-bottom: 2vh; 
+    }
+}
+.stats-container{
+
+    // display: flex;
+    // justify-content: space-around;
+    // align-items: center;
+
+    //  display: flex;
+    @include flexbox(); 
+    //  justify-content: space-around;
+    @include justify-content(space-around);
+    // align-items: center;    
+    @include align-items(center);
+
+    .stats{
+        //  display: flex;
+        @include flexbox(); 
+        //  flex-flow: column;
+        @include flex-flow(column nowrap);
+        //  justify-content: space-around;
+        @include justify-content(space-around);
+        // align-items: center;    
+        @include align-items(center);
+        p{
+            text-transform: uppercase;
+            color: $accent-color;
+            margin: 0;
+            // font-size: 12px;
+            @include font-size(12);
+        }
+        span{
+            // font-size: 32px;
+            @include font-size(32);
+            font-weight: bold;
+        }
+    }
+}
+.top-property-container{
+    //  display: flex;
+    @include flexbox(); 
+    //  flex-flow: row;
+    @include flex-flow(row nowrap);
+    // align-items: flex-start;    
+    @include align-items(flex-start);
+    margin-top: 2vh;
+    // font-size: 12px;
+    @include font-size(12);
+    font-weight: 500;
+
+    .top-property-score{
+        //  display: flex;
+        @include flexbox(); 
+        // justify-content: space-around;
+        @include justify-content(space-around);
+        // align-items: center;
+        @include align-items(center);
+        // flex-flow: column;
+        @include flex-flow(column nowrap); 
+        p{
+            margin: 0;
+            // font-size: 12px;
+            @include font-size(12);
+        }
+        span{
+            color: $dark-primary-color;
+            // font-size: 40px;
+            @include font-size(40);
+            font-weight: bold;
+        }
+    }
+
+    .top-property-details{
+        // flex-flow: row wrap;
+        @include flex-flow(row wrap); 
+        // flex-grow: 1;
+        @include flex-grow(1);
+        // justify-content: space-between;
+        @include justify-content(space-between);
+        // align-items: flex-start;
+        @include align-items(flex-start);
+        padding-left: 4vw; 
+    }
+    .top-property-address{
+        //  display: flex;
+        @include flexbox();
+        margin-bottom: 16px;
+    }
+    .top-property-price{
+        //  display: flex;
+        @include flexbox();
+    }
+    .top-property-breakdown{
+        //  display: flex;
+        @include flexbox();
+        // flex: 1;
+        @include flex(1 0 auto); 
+        // justify-content: flex-end;
+        @include justify-content(flex-end);
+        padding-right: 5vh;
+    }
+
+    .top-property-breakdown-detail {
+        margin-left: 5%;
+    }
+}
+.new-user-guide{
+    // font-size: 11px;
+    @include font-size(11); 
+    font-weight: 500;
+    margin-bottom: 2vh;
+        
+    .guide-container {
+        // display: flex;
+        @include flexbox(); 
+        // justify-content: space-between;
+        @include justify-content(space-between);
+        // align-items: center;
+        @include align-items(center);
+        margin-bottom: 2vh;
+    }
+    .hca-primary-button {
+        color: $white;
+        background-color: $dark-primary-color;
+    }
+    .guide-title{
+        flex: 1;
+        margin-left: 4vw;
+    }
+    .guide-icon{
+        // display: flex;
+        @include flexbox(); 
+        // justify-content: center;
+        @include justify-content(center);
+        // align-items: center;
+        @include align-items(center);
+        background-color: gray;
+        width: 8vw;
+        height: 8vw;
+        // border-radius: 50%;
+        @include border-radius(50%);
+        text-align: center;
+        color: $white;
+    }
+    .guide-active .guide-icon{
+        background-color: $green;
+    }
+}
+// END : Panel that appears atop Dashboard

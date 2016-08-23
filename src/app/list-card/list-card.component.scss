@@ -1,42 +1,72 @@
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
 
-@import '../styles/colors.scss'; 
+//  display: flex;
+@include flexbox(); 
+// flex: 1;
+@include flex(1 0 auto); 
+//  flex-flow: column;
+@include flex-flow(column nowrap);
+//  align-items: center;
+// flex-grow: 1;
+@include flex-grow(1);
+@include align-items(center); 
+//  justify-content: space-between;
+@include justify-content(space-between); 
+// align-self: center;    
+@include align-self(center);
+// align-self: center;
+@include align-items(center);
+@include font-size(16);
+@include box-sizing(border-box);
+@include border-radius(0 10% 10% 0); 
 
-md-card{
-    box-sizing: border-box ;
-    margin: 1.5%;
+.list-card-container{
+    // box-sizing: border-box ;
+    @include box-sizing(border-box);
+    margin: 1.5% !important;
 
     img{
-        border-radius: 2px 2px 0 0;
+        // border-radius: 2px 2px 0 0;
+        @include border-radius(2px 2px 0 0); 
     }
     md-card-subtitle {
-        font-size: 18px; 
+        // font-size: 18px;
+        @include font-size(28); 
     } 
+}
+
+.card-spacing{
+    margin: 1.5%;
 }
 
 .scorecard-total{
     position: absolute;
     width: 20%;
-    height: 20%;
     top: 0;
     right: 5%;
     background-color: transparentize($color: black, $amount: 0.5);
     font-size: 5vw;
-    border-radius: 0 0 10px 10px;
+    // border-radius: 0 0 10px 10px;
+    @include border-radius(0 0 10px 10px);
     text-align: center;
     color: $white;
     p {
         margin: 0;
-        padding-top: 10%;
+        padding: 20% 0;
     }
 }
 
 .list-card-title{
-    font-size: 12px;
+    // font-size: 12px;
+    @include font-size(12);
     margin: 0; 
 }
 .list-card-subtitle{
     color: $accent-color; 
-    font-size: 10px;
+    // font-size: 10px;
+    @include font-size(10);
     margin: 0;  
 }
 
@@ -45,6 +75,7 @@ md-card-header .md-card-header-text{
 }
 
 md-card-subtitle.list-card-subtitle{
-    font-size: 10px;
+    // font-size: 10px;
+    @include font-size(10);
     margin: 0;  
 }

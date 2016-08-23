@@ -7,6 +7,7 @@ import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_ICON_DIRECTIVES, MdIconRegistry } from '@angular2-material/icon';
 
 import { CommonService } from '../shared'; 
+import { TitleStateService } from '../shared'; 
 import { Wishlist } from '../shared'; 
 import { Priority } from '../shared'; 
 import { UserStateService } from '../shared'; 
@@ -30,6 +31,7 @@ import { HcaListitemComponent } from '../hca-listitem';
 export class WishlistComponent implements OnInit {
 
   constructor(private commonService : CommonService,
+              private titleState: TitleStateService,
               private wishlistState : WishlistStateService) { }
 
   errorMessage: string;
@@ -45,7 +47,7 @@ export class WishlistComponent implements OnInit {
 			error => this.errorMessage = <any>error);
     //Update wishliststate with user
     
-    this.commonService.setTitle("Your Wishlist");
+    this.titleState.setTitle("Your Wishlist");
     console.log("Wishlist OnInit")
   }
 

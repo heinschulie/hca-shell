@@ -123,6 +123,7 @@ const barrels: string[] = [
   'app/image-slide',
   'app/image-uploader',
   'app/autocomplete',
+  'app/dash-stats',
   /** @cli-barrel */
 ];
 

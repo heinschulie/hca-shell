@@ -1,15 +1,45 @@
+@import '../styles/colors.scss';
+@import '../styles/_flexmixins.scss'; 
+@import '../styles/_etcmixins.scss'; 
+
+// //  display: flex;
+// @include flexbox(); 
+// // flex: 1;
+// @include flex(1 0 auto); 
+// //  flex-flow: column;
+// @include flex-flow(column nowrap);
+// //  align-items: center;
+// // flex-grow: 1;
+// @include flex-grow(1);
+// @include align-items(center); 
+// //  justify-content: space-between;
+// @include justify-content(space-between); 
+// // align-self: center;    
+// @include align-self(center);
+// // align-self: center;
+// @include align-items(center);
+// @include font-size(16);
+// @include box-sizing(border-box);
+// @include border-radius(0 10% 10% 0);
 
 md-card{
-    box-sizing: border-box ;
+    box-sizing: border-box;
+    // @include box-sizing(border-box);
     margin: 1.5%;
 
     img{
-        border-radius: 2px 2px 0 0;
+        // border-radius: 2px 2px 0 0;
+        @include border-radius(2px 2px 0 0);
     }
 
     md-card-subtitle {
-        font-size: 18px; 
+        // font-size: 18px; 
+        @include font-size(18);
     }
+}
+
+.card-spacing{
+    margin: 1.5%;
 }
 
 .scorecard-total{
@@ -19,68 +49,93 @@ md-card{
     top: 0;
     right: 5%;
     background-color: transparentize($color: black, $amount: 0.5);
-    border-radius: 0 0 20px 20px;
+    // border-radius: 0 0 20px 20px;
+    @include border-radius(0 0 20px 20px);
+    // Include this: @include font-size(16);
     font-size: 10vw;
     text-align: center;
-    color: white;
+    color: $white;
     p {
         margin: 0;
         padding-top: 10%;
     }
 }
 
-// .smalltotal{
-//     font-size: 5vw;
-//     border-radius: 0 0 10px 10px;
-// }
-
-// .scorecard-headline-detail{
-//     float: right; 
-//     font-size: 16px;
-//     margin-left: 5%;
-// }
-
 .mother{
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+    // display: flex;
+    @include flexbox(); 
+    // flex-flow: row nowrap;
+    @include flex-flow(row nowrap);
+    // align-items: center;
+    @include align-items(center);
 
     .sync-container{
         margin-right: 4%;
         .sync-indicator{
-            border-radius: 50%;
+            // border-radius: 50%;
+            @include border-radius(50%);
             width: 30px;
             height: 30px; 
-            background: red;
+            // background: red;
         }
     }
 
     .brother{
-        flex-flow: row wrap;
-        flex-grow: 30;
-        justify-content: space-between;
-        align-items: flex-start;
+        // flex-flow: row wrap;
+        @include flex-flow(row wrap);
+        // flex-grow: 30;
+        @include flex-grow(30); // **************** SUSPECT
+        // justify-content: space-between;
+        @include justify-content(space-between);
+        // align-items: flex-start;
+        @include align-items(flex-start);
+
+
+        @include flex-flow(column nowrap);
+        //  align-items: center;
+        // flex-grow: 1;
+        @include flex-grow(1);
+        @include align-items(center); 
+        //  justify-content: space-between;
+        @include justify-content(space-between); 
+        // align-self: center;    
+        @include align-self(center);
+        // align-self: center;
+        @include align-items(center);
     }
     .child1{
-        display: flex;
-        font-size: 14px;
+        // display: flex;
+        @include flexbox();
+        // justify-content: space-between;
+        @include justify-content(space-between);
+        // font-size: 14px;
+        @include font-size(14);
         font-weight: 400;
         margin-bottom: 16px;
+        
     }
     .child2{
-        display: flex;
-        align-self: flex-start;
-        align-items: center;
+        // display: flex;
+        @include flexbox();
+        // align-self: flex-start;
+        @include align-self(centflex-starter);
+        // align-items: center;
+        @include align-items(center);
         margin-left: 2%;
     }
     .child3{
-        display: flex;
-        font-size: 14px;
+        // display: flex;
+        @include flexbox();
+        // font-size: 14px;
+        @include font-size(14);
     }
     .child4{
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
+        // display: flex;
+        @include flexbox();
+        // flex: 1;
+        @include flex(1 0 auto);
+        // justify-content: flex-end;
+        @include justify-content(flex-end);
     }
 
     span.scorecard-headline-detail {
