@@ -1,0 +1,84 @@
+<div class="body" [ngClass]="{ 'accommodate-exp-toolbar': !!title }">
+	<div class="main">
+		<!--<div class="content">   -->
+    <div class="content" [className]="contentclass"> 
+			<div class="box">
+        <!--Panel that appears atop Dashboard-->
+        <!--<div class="dashboard-synopsis">
+          <h4>Your Dashboard</h4>
+          <h5>Recent Activity</h5>
+          <div class="stats-container">
+            <div class="stats">
+              <p>Added</p>
+              <span>3</span>
+            </div>
+            <div class="stats">
+              <p>Rated</p>
+              <span>3</span>
+            </div>
+            <div class="stats">
+              <p>Reviews</p>
+              <span>3</span>
+            </div>
+          </div>
+          <md-divider></md-divider>
+          <div class="top-property-container" *ngIf="userHasWishlist() && userHasProperty()">
+            <div class="top-property-score">
+              <p>Top Score</p>
+              <span>3</span>
+            </div>
+            <div class="top-property-details" >
+                <div class="top-property-address">
+                  14 Norwood Road, Sea Point  
+                </div>
+                <div class="top-property-price">
+                  R 4356420 
+                  <div class="top-property-breakdown">     
+                    <span class="top-property-breakdown-detail">2 Bed</span>
+                    <span class="top-property-breakdown-detail">145 sqm</span> 
+                  </div> 
+                </div>
+            </div>
+          </div>
+          <div class="new-user-guide"  *ngIf="!userHasWishlist() || !userHasProperty()">
+            <p>Lorem ipsum dolor sit amet, consectetuer, sed diam. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p>
+            <div class="guide-container" [ngClass]="{ 'guide-active' : !userHasWishlist() }">
+              <span class="guide-icon" *ngIf="!userHasWishlist()">1</span>
+              <span class="guide-icon guide-icon-complete" *ngIf="userHasWishlist()"><md-icon>done</md-icon></span>  
+              <span class="guide-title">
+                Create your Wishlist
+              </span>
+              <button md-button class="hca-primary-button" (click)="toggleWl()" *ngIf="!userHasWishlist()">Start</button>
+            </div>
+            <div class="guide-container" [ngClass]="{ 'guide-active' : userHasWishlist() && !userHasProperty() }">
+              <span class="guide-icon" *ngIf="!userHasProperty()">2</span>
+              <span class="guide-icon guide-icon-complete" *ngIf="userHasProperty()"><md-icon>done</md-icon></span>  
+              <span class="guide-title">
+                Create your 1st property
+              </span>
+              <button md-button class="hca-primary-button" (click)="togglePop()" *ngIf="userHasWishlist() && !userHasProperty()">Start</button>
+            </div>
+          </div>
+          <md-divider></md-divider>
+        </div>-->
+        <!--END : Panel that appears atop Dashboard-->
+        <app-dash-stats></app-dash-stats>
+        <div class="dash-card-container" [ngClass]="{ passive:!scorecard.active }" *ngFor="let scorecard of scorecards" (click)="onSelect(scorecard)"> 
+          <app-list-card *ngIf="!scorecard.active" [scorecard]="scorecard"></app-list-card> 
+          <app-detail-card *ngIf="scorecard.active" [scorecard]="scorecard"></app-detail-card>
+        </div>
+			</div> 
+		</div>
+    <footer class="bottom-navigation">
+      <div class="button-container">
+        <button class="" md-button (click)="navigateToAdd()">ADD</button>
+      </div>
+      <div class="button-container">
+        <button class="" md-button [disabled]="!scorecard" (click)="navigateToRate()">RATE</button>
+      </div>
+      <div class="button-container">
+        <button class="" md-button [disabled]="!scorecard" (click)="navigateToReview()">REVIEW</button>
+      </div>
+		</footer>
+	</div>
+</div>

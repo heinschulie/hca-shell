@@ -1,0 +1,30 @@
+
+
+<md-card class="card-spacing"> 
+  <img md-card-image [src]="scorecard.featuredimage.card_url">
+  <div class="mother">
+    <!--<div class="sync-container">
+      <div class="sync-indicator"></div>
+    </div>-->
+    <div class="brother" >
+        <div class="child1">
+          {{ scorecard.property.address }}  
+          <span class="expander"></span>
+          <div class="child2">
+            <md-icon>camera</md-icon>
+            {{scorecard.media.length}} 
+          </div>
+        </div>
+        <div class="child3">
+          R {{scorecard.property.cost}} 
+          <div class="child4">     
+            <span class="scorecard-headline-detail">2 Bed</span>
+            <span class="scorecard-headline-detail">145 sqm</span> 
+          </div> 
+        </div>
+    </div>
+  </div>
+  <span class="scorecard-total">
+    <p>{{ scorecard.total }}</p>
+  </span>
+</md-card>

@@ -1,0 +1,34 @@
+<div class="range-container">
+  <p class="range-description">Little</p>
+  <div class="range-slider" *ngIf="context === 'Wishlist'">
+    <span class="range-slider__value" [ngStyle]="{'margin-left': slidervalue() }">
+      <!--<md-icon>room</md-icon>-->
+      {{slidermodel.weight}}
+    </span>
+    <input class="range-slider__range" type="range" min="1" max="5" step="1" [(ngModel)]="slidermodel.weight">
+  </div>
+  <div class="range-slider" *ngIf="context === 'Scorecard'">
+    <span class="range-slider__value" [ngStyle]="{'margin-left': slidervalue() }">
+      <!--<md-icon>room</md-icon>-->
+      {{slidermodel.score}}
+    </span>
+    <input class="range-slider__range" type="range" min="1" max="5" step="1" [(ngModel)]="slidermodel.score">
+  </div>
+  <p class="range-description">Crucial</p>
+</div>
+
+
+
+<!--[(ngModel)]="sliderValue"
+
+<!--<div class="range-container">
+  <div 
+  id="range" 
+  range="min"
+  min="0"
+  step="20"
+  max="100"
+  value="50"
+  class="cntr">
+  </div>
+</div>-->

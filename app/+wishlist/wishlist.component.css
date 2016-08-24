@@ -1,0 +1,30 @@
+md-card.wishlistf-card-container {
+  min-height: 84vh; }
+
+.priority-text {
+  width: auto;
+  float: left;
+  padding: 0 5%; }
+
+.priority-weight {
+  font-weight: bold;
+  float: right; }
+
+.left {
+  text-align: left; }
+
+.lower-heading {
+  margin-top: 5%; }
+
+.small-card-title {
+  font-size: 16px; }
+
+.addPriorityContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch; }
+  .addPriorityContainer button {
+    align-self: flex-end; }
+
+.wishlist-card-height {
+  min-height: 84vh; }

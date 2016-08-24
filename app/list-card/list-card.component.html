@@ -1,0 +1,14 @@
+<md-card class="list-card-container card-spacing"> 
+  <img md-card-image [src]="scorecard?.featuredimage?.card_url">
+  <!--<md-card-header>-->
+    <!--<div md-card-avatar class="sync-indicator"></div>-->
+    <!--<md-card-title class="list-card-title">{{ scorecard.property.address | truncate: 35 }}</md-card-title>-->
+    <!--<md-card-title class="list-card-title">{{ scorecard.property.address | addressShortener }}</md-card-title>
+    <md-card-subtitle class="list-card-subtitle">R {{scorecard.property.cost}}</md-card-subtitle>-->
+  <!--</md-card-header>-->
+  <p class="list-card-title">{{ scorecard.property.address | addressShortener }}</p>
+  <p class="list-card-subtitle">R {{scorecard.property.cost}}</p>
+  <span class="scorecard-total">
+    <p>{{ scorecard.total }}</p>
+  </span>
+</md-card>

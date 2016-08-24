@@ -1,0 +1,14 @@
+<md-card class="container-card">
+    <a *ngFor="let scorecard of scorecards" [routerLink]="['/images/' + scorecard._id ]"> 
+      <div class="gallery-line-item">
+          <h6 md-line>{{scorecard.property.address}}</h6>
+          <div md-line class="image-strip">
+            <md-grid-list cols="6">
+              <md-grid-tile *ngFor="let media of scorecard?.media">
+                <img class="grid-list-image" [src]="media.grid_url" />
+              </md-grid-tile>
+            </md-grid-list>
+          </div>
+      </div>
+    </a>
+</md-card>

@@ -1,0 +1,14 @@
+<div class="carousel">
+  <ul class="slides" [ngStyle]="{'width': 100*images.length + '%', 'margin-left': currentLeft + '%'}">
+    <li *ngFor=" let image of images" [style.width]="100/images.length + '%'">
+      <h2 *ngIf="image.caption">{{image.caption}}</h2>
+      <img src="{{image.economic_url}}" alt="">
+    </li>
+  </ul>
+  <span class="carousel-pointer pointer-left" (click)="moveBack()">
+    <md-icon>chevron_left</md-icon>
+  </span>
+  <span class="carousel-pointer pointer-right" (click)="moveForward()">
+    <md-icon>chevron_right</md-icon>
+  </span>
+</div>

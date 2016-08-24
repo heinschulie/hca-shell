@@ -1,0 +1,15 @@
+<md-card class="login-card">
+  <md-card-content class="login-card-content">
+    <form class="login-form" (ngSubmit)="onSubmit(email, password)" #loginForm="ngForm">
+      <h3>Sign In</h3>
+      <md-input #username class="form-input" required [(ngModel)]="email" name="username" placeholder="Email"></md-input>
+      <md-input class="form-input" required type="password" [(ngModel)]="password" name="password" placeholder="Password"></md-input>
+      <button class="login-button" type="submit"  [disabled]="!loginForm.form.valid" md-raised-button>
+        <!--<md-icon class="md-24">add</md-icon>-->
+        Sign In
+      </button>
+      <md-progress-bar *ngIf="inProgress" mode="indeterminate"></md-progress-bar>
+    </form>
+  </md-card-content>
+  <img class="br-slab" src="https://res.cloudinary.com/swigbig/image/upload/v1469446689/BrightRock-Slab_wifgcz.png" />
+</md-card>

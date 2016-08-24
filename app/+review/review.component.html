@@ -1,0 +1,26 @@
+<md-card >
+  <app-detail-card *ngIf="scorecard" [scorecard]="scorecard"></app-detail-card>
+  <h4>Scorecard</h4>
+  <!--<div *ngFor="let score of scorecard?.scores" class="wishlist-item">
+    <div class="priority">
+      <span class="priority-weight"> {{score.score}}</span>
+    </div>
+    <div class="score">
+      <span class="item-description"> {{score.priority.description}} </span>
+      <span class="item-score">
+        <div>{{score.score}}</div>
+      </span>
+    </div>
+  </div>  -->
+  <app-hca-listitem *ngFor="let score of scorecard?.scores" 
+                    [model]="score" 
+                    [slidermodel]="score.score" 
+                    context="Scorecard"></app-hca-listitem>
+</md-card>
+<app-image-carousel [images]="scorecard?.media"></app-image-carousel>
+<md-grid-list cols="3">
+  <md-grid-tile *ngFor="let media of scorecard?.media" (click)="selectMedia(media)">
+    <!--<img class="grid-list-image" [src]="media.url" />-->
+    <img class="grid-list-image" [src]="media.grid_url" />
+  </md-grid-tile>
+</md-grid-list>

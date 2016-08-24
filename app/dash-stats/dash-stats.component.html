@@ -1,0 +1,57 @@
+<div class="dashboard-synopsis">
+  <h4>Your Dashboard</h4>
+  <h5>Recent Activity</h5>
+  <div class="stats-container">
+    <div class="stats">
+      <p>Added</p>
+      <span>{{user?.scorecards?.length}}</span>
+    </div>
+    <div class="stats">
+      <p>Rated</p>
+      <span>{{user?.scorecards?.length}}</span>
+    </div>
+    <div class="stats">
+      <p>Reviews</p>
+      <span>{{user?.scorecards?.length}}</span>
+    </div>
+  </div>
+  <md-divider></md-divider>
+  <div class="top-property-container" *ngIf="userHasWishlist() && userHasScorecards()">
+    <div class="top-property-score">
+      <p>Top Score</p>
+      <span>{{topScorecard?.total}}</span>
+    </div>
+    <div class="top-property-details" >
+        <div class="top-property-address">
+          {{topScorecard?.property?.address}}  
+        </div>
+        <div class="top-property-price">
+          R {{topScorecard?.property?.cost}} 
+          <div class="top-property-breakdown">     
+            <span class="top-property-breakdown-detail">{{topScorecard?.property?.bedrooms}} Bed</span>
+            <span class="top-property-breakdown-detail">{{topScorecard?.property?.floorarea}} sqm</span> 
+          </div> 
+        </div>
+    </div>
+  </div>
+  <div class="new-user-guide"  *ngIf="!userHasWishlist() || !userHasScorecards()">
+    <p>Lorem ipsum dolor sit amet, consectetuer, sed diam. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p>
+    <div class="guide-container" [ngClass]="{ 'guide-active' : !userHasWishlist() }">
+      <span class="guide-icon" *ngIf="!userHasWishlist()">1</span>
+      <span class="guide-icon guide-icon-complete" *ngIf="userHasWishlist()"><md-icon>done</md-icon></span>  
+      <span class="guide-title">
+        Create your Wishlist
+      </span>
+      <a md-button class="hca-primary-button" [routerLink]="['/wishlist']"  *ngIf="!userHasWishlist()">Start</a>
+    </div>
+    <div class="guide-container" [ngClass]="{ 'guide-active' : userHasWishlist() && !userHasScorecards() }">
+      <span class="guide-icon" *ngIf="!userHasScorecards()">2</span>
+      <span class="guide-icon guide-icon-complete" *ngIf="userHasScorecards()"><md-icon>done</md-icon></span>  
+      <span class="guide-title">
+        Create your 1st scorecard
+      </span>
+      <a md-button class="hca-primary-button" [routerLink]="['/addrate']" *ngIf="userHasWishlist() && !userHasScorecards()">Start</a>
+    </div>
+  </div>
+  <md-divider></md-divider>
+</div>

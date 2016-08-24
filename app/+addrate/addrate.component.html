@@ -1,0 +1,97 @@
+<md-card class="stepper-card clearfix">
+  <md-card-title class="stepper-title">
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : addActive() }">
+      <span *ngIf="!addComplete()">1</span>
+      <md-icon *ngIf="addComplete()">done</md-icon>
+    </button> 
+    <span class="title">Add</span>
+  </md-card-title>
+  <div class="stepper-detail-container stepper-border" *ngIf="!scorecard?.property?._id">
+    <form class="add-form" (ngSubmit)="addNewProperty()" #addForm="ngForm">
+      <md-input #address class="form-input" required [(ngModel)]="addressFragment" name="address" placeholder="What is the address?" (keyup)=debouncedAutocompleteProperties()></md-input>
+      <md-list *ngIf="filteredList.length > 0">
+        <md-list-item *ngFor="let property of filteredList" (click)="select(property)">
+          <img md-list-avatar [src]="property.featuredimage?.url" alt="...">
+          <h5 md-line> {{property.address}} </h5>
+          <p md-line>
+            <span> {{property.bedrooms}} Rooms </span>
+            <span class="property-info"> -- {{property.tags}} </span>
+          </p>
+        </md-list-item>
+      </md-list>
+    </form>
+  </div>
+  <div class="stepper-detail-container stepper-border" *ngIf="scorecard?.property?._id">
+    <div class="property-container">
+      <div class="property-details">
+          <div class="property-address">
+            {{scorecard?.property?.address}}  
+          </div>
+          <div class="property-price">
+            R {{scorecard?.property?.cost}}  
+            <div class="property-breakdown">     
+              <span class="property-breakdown-detail">
+                {{scorecard?.property?.bedrooms}} Bed  
+              </span>
+              <span class="property-breakdown-detail">{{scorecard?.property?.floorarea}} sqm</span> 
+            </div> 
+          </div>
+      </div>
+    </div>
+  </div>
+  <md-card-title class="stepper-title">  
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : imageActive() }">
+      <span *ngIf="!scorecard?.property?.featuredimage?.url">2</span>
+      <md-icon *ngIf="scorecard?.property?.featuredimage?.url">done</md-icon>
+    </button> 
+    <span class="title">Key Image</span>
+  </md-card-title>
+  <div class="stepper-detail-container stepper-border">
+    <md-card *ngIf="scorecard?.property?.featuredimage?.url">
+      <img md-card-image [src]="scorecardImageUrl">
+      <app-image-uploader 
+        [chosenfile]="mediafile" 
+        [selfupload]="false" 
+        form="card" 
+        (imageUrlChange) = "onFeaturedImageChange($event)"
+        >
+      </app-image-uploader>
+      <md-progress-bar *ngIf="inProgress" mode="indeterminate"></md-progress-bar>
+    </md-card>
+  </div>
+  <div class="stepper-photo-button-container" *ngIf="!scorecard?._id || scorecardImageUrl !== scorecard.featuredimage.url">
+    <button md-raised-button 
+            class="arr-save" 
+            [disabled]="!scorecard?._id && !scorecard?.featuredimage?.url" 
+            (click)="saveScorecard()"
+            *ngIf="scorecard?.property?._id">
+      Save
+    </button>
+  </div>
+  <md-card-title class="stepper-title"> 
+    <button md-icon-button class="stepper-icon stepper-icon-inactive" [ngClass]="{ 'stepper-icon-active' : rateActive() }">
+      <span *ngIf="!rateComplete()">3</span>
+      <md-icon *ngIf="rateComplete()">done</md-icon>
+    </button> 
+    <span class="title">Rate</span>
+    
+  </md-card-title>
+  <div class="stepper-detail-container rate-container" *ngIf="rateActive()"> 
+    <app-hca-listitem *ngFor="let score of scorecard?.scores" 
+                    [model]="score" 
+                    [slidermodel]="score.score"
+                    context="Scorecard"
+                    (updateItemEvent) = "onUpdateScore($event)"></app-hca-listitem>
+  </div>
+  <div class="stepper-photo-button-container" *ngIf="scorecard?._id">
+    <!--<button md-fab class="arr-camera" [disabled]="!rateActive()" *ngIf="scorecard?._id">
+      <md-icon>add_a_photo</md-icon>
+    </button>-->
+    <app-image-uploader 
+      [selfupload]="false" 
+      form="fab" 
+      (imageUrlChange) = "onMediaItemChange($event)"
+      (fileAvailable) = "onMediaItemChange($event)">
+    </app-image-uploader>
+  </div>
+</md-card>
