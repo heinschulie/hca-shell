@@ -30,10 +30,7 @@ export class DashStatsComponent implements OnInit {
 
   // DASHBOARD PANEL FOR 1st TIME USERS
 
-  haswl = false; 
-  toggleWl() {
-    this.haswl = !this.haswl; 
-  }
+  
   userHasWishlist() : boolean { 
     return !!this.user.wishlist.priorities.length; // TODO 
   }
