@@ -460,6 +460,14 @@ md-card{
     height: 90vh;
 }
 
+.iosbrowser{
+    @include flexbox(); 
+    position: absolute;
+    top: 10vh; // Toolbar height
+    bottom: 0;
+    height: 80vh; // Was 90.... See Note 1. 
+}
+
 .accommodate-exp-toolbar{
     top: 16vh;
     height: 84vh; 
@@ -494,15 +502,6 @@ md-card{
     overflow: auto;
     background: $white;
     padding: 0 2vw; 
-}
-
-.iosbrowser{
-  //  display: flex;
-  @include flexbox(); 
-  // flex: 1;
-  @include flex(1 0 auto); 
-  overflow: auto;
-  height: 77vh; // Was 70.... See Note 1. 
 }
 
 .box {

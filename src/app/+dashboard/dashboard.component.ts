@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   scorecards: Scorecard[];
   scorecard: Scorecard;
   private securitySubscription:any;
-  contentclass : string = "content"; 
+  contentclass : string = "body"; 
   // private authenticated:boolean = false;
 
   ngOnInit() { 
